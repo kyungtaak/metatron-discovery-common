@@ -1,0 +1,20 @@
+.idea
+.classpath
+target
+h2db
+*.iml
+h2db.*.db
+/bin/
+.DS_Store
+
+### Eclipse ###
+.metadata
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+.project
