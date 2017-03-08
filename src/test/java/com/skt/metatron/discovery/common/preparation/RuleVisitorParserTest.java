@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
 public class RuleVisitorParserTest {
   @Test
   public void dropTest() {
-    String ruleCode = "drop col: test";
+    String ruleCode = "drop col: test1, test2";
 
     runAndPrint(ruleCode);
   }
@@ -47,6 +47,13 @@ public class RuleVisitorParserTest {
     runAndPrint(ruleCode);
   }
 
+  @Test
+  public void setTest2() {
+    String ruleCode = "set col: lot_id value: lower(column) row: cnt > 5";
+
+    runAndPrint(ruleCode);
+  }
+
   private void runAndPrint(String ruleCode) {
 
     Rule rule = new RuleVisitorParser().parse(ruleCode);
@@ -58,7 +65,7 @@ public class RuleVisitorParserTest {
     } catch (JsonProcessingException e) {
       e.printStackTrace();
     }
-    System.out.printf("code below: %n '%s' %n has been parsed to object: %n '%s'%n", ruleCode, json);
+    System.out.printf("code below: %n '%s' %n has been parsed to object: %n '%s'%n '%s'%n", ruleCode, json, rule.toString());
   }
 
 }

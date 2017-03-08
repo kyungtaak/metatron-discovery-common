@@ -13,7 +13,7 @@ public interface Function {
 
   String name();
 
-  ExprEval apply(List<Expr> args, NumericBinding bindings);
+  boolean validate(List<Expr> args);
 
   interface Factory extends Supplier<Function> {
   }

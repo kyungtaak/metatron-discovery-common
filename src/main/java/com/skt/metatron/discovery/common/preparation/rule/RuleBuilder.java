@@ -10,8 +10,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
 
-import static com.skt.metatron.discovery.common.preparation.rule.expr.Expr.IdentifierExpr;
-
 
 /**
  * Created by kyungtaak on 2017. 3. 3..
@@ -26,6 +24,7 @@ public class RuleBuilder {
     ruleNameMapper.put("settype", () -> new SetType());
     ruleNameMapper.put("rename", () -> new Rename());
     ruleNameMapper.put("keep", () -> new Keep());
+    ruleNameMapper.put("set", () -> new Set());
   }
 
   String ruleName;
@@ -41,17 +40,17 @@ public class RuleBuilder {
 
     this.arguments.forEach(arguments -> {
 
-      Object value;
-      if (arguments.getValue() instanceof IdentifierExpr) {
-        value = ((IdentifierExpr) arguments.getValue()).getValue();
-      } else if (arguments.getValue() instanceof Constant) {
-        value = ((Constant) arguments.getValue()).getValue();
-      } else {
-        value = arguments.getValue();
-      }
+//      Object value;
+//      if (arguments.getValue() instanceof IdentifierExpr) {
+//        value = ((IdentifierExpr) arguments.getValue()).getValue();
+//      } else if (arguments.getValue() instanceof Constant) {
+//        value = ((Constant) arguments.getValue()).getValue();
+//      } else {
+//        value = arguments.getValue();
+//      }
 
       try {
-        BeanUtils.setProperty(rule, arguments.getName().toLowerCase(), value);
+        BeanUtils.setProperty(rule, arguments.getName().toLowerCase(), arguments.getValue());
       } catch (IllegalAccessException | InvocationTargetException e) {
         new RuntimeException("error!" + e.getMessage());
       }

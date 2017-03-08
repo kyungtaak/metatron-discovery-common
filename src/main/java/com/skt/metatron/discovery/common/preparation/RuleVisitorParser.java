@@ -15,6 +15,7 @@ import com.skt.metatron.discovery.common.preparation.rule.expr.Constant;
 import com.skt.metatron.discovery.common.preparation.rule.expr.Expr;
 import com.skt.metatron.discovery.common.preparation.rule.expr.Expression;
 import com.skt.metatron.discovery.common.preparation.rule.expr.Function;
+import com.skt.metatron.discovery.common.preparation.rule.expr.Identifier;
 
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CharStream;
@@ -107,22 +108,55 @@ public class RuleVisitorParser implements Parser {
 
   private static class ExpressionVisitor extends RuleBaseVisitor<Expression> {
 
+    @Override
     public Expression visitIdentifierExpr(RuleParser.IdentifierExprContext ctx) {
-      return new Expr.IdentifierExpr(ctx.getText());
+      return new Identifier.IdentifierExpr(ctx.getText());
     }
 
-    public Expression visitString(RuleParser.StringContext ctx) {
+    @Override
+    public Expression visitStringExpr(RuleParser.StringExprContext ctx) {
       return new Constant.StringExpr(ctx.getText());
     }
 
+    @Override
     public Expression visitDoubleExpr(RuleParser.DoubleExprContext ctx) {
       return new Constant.DoubleExpr(Double.valueOf(ctx.getText()));
     }
 
+    @Override
     public Expression visitLongExpr(RuleParser.LongExprContext ctx) {
       return new Constant.LongExpr(Long.valueOf(ctx.getText()));
     }
 
+    @Override
+    public Expression visitIdentifierArrayExpr(RuleParser.IdentifierArrayExprContext ctx) {
+      return new Identifier.IdentifierArrayExpr(ctx.IDENTIFIER().stream()
+          .map(terminalNode -> terminalNode.getText())
+          .collect(toList()));
+    }
+
+    @Override
+    public Expression visitDoubleArrayExpr(RuleParser.DoubleArrayExprContext ctx) {
+      return new Constant.ArrayExpr<>(ctx.DOUBLE().stream()
+          .map(terminalNode -> Double.valueOf(terminalNode.getText()))
+          .collect(toList()));
+    }
+
+    @Override
+    public Expression visitLongArrayExpr(RuleParser.LongArrayExprContext ctx) {
+      return new Constant.ArrayExpr<>(ctx.LONG().stream()
+          .map(terminalNode -> Long.valueOf(terminalNode.getText()))
+          .collect(toList()));
+    }
+
+    @Override
+    public Expression visitStringArrayExpr(RuleParser.StringArrayExprContext ctx) {
+      return new Constant.ArrayExpr<>(ctx.STRING().stream()
+          .map(terminalNode -> terminalNode.getText())
+          .collect(toList()));
+    }
+
+    @Override
     public Expression visitFunctionExpr(RuleParser.FunctionExprContext ctx) {
       Function func = getFunctionByName(ctx.IDENTIFIER().getText());
 
@@ -132,6 +166,7 @@ public class RuleVisitorParser implements Parser {
       return new Expr.FunctionExpr(func, func.name(), exprs);
     }
 
+    @Override
     public Expression visitLogicalOpExpr(RuleParser.LogicalOpExprContext ctx) {
 
       int opCode = ((TerminalNode) ctx.getChild(1)).getSymbol().getType();
@@ -178,6 +213,7 @@ public class RuleVisitorParser implements Parser {
       }
     }
 
+    @Override
     public Expression visitAddSubExpr(RuleParser.AddSubExprContext ctx) {
       int opCode = ((TerminalNode) ctx.getChild(1)).getSymbol().getType();
       switch (opCode) {
@@ -198,6 +234,7 @@ public class RuleVisitorParser implements Parser {
       }
     }
 
+    @Override
     public Expression visitLogicalAndOrExpr(RuleParser.LogicalAndOrExprContext ctx) {
       int opCode = ((TerminalNode) ctx.getChild(1)).getSymbol().getType();
       switch (opCode) {
@@ -218,10 +255,12 @@ public class RuleVisitorParser implements Parser {
       }
     }
 
+    @Override
     public Expression visitNestedExpr(RuleParser.NestedExprContext ctx) {
       return ctx.getChild(1).accept(this);
     }
 
+    @Override
     public Expression visitUnaryOpExpr(RuleParser.UnaryOpExprContext ctx) {
       int opCode = ((TerminalNode) ctx.getChild(0)).getSymbol().getType();
       switch (opCode) {
@@ -234,6 +273,7 @@ public class RuleVisitorParser implements Parser {
       }
     }
 
+    @Override
     public Expression visitLogicalAndOrExpr2(RuleParser.LogicalAndOrExpr2Context ctx) {
 
       int opCode = ((TerminalNode) ctx.getChild(1)).getSymbol().getType();
@@ -255,6 +295,7 @@ public class RuleVisitorParser implements Parser {
       }
     }
 
+    @Override
     public Expression visitMulDivModuloExpr(RuleParser.MulDivModuloExprContext ctx) {
       int opCode = ((TerminalNode) ctx.getChild(1)).getSymbol().getType();
       switch (opCode) {
@@ -281,6 +322,7 @@ public class RuleVisitorParser implements Parser {
       }
     }
 
+    @Override
     public Expression visitPowOpExpr(RuleParser.PowOpExprContext ctx) {
       return new Expr.BinPowExpr(
           ctx.getChild(1).getText(),
@@ -289,6 +331,7 @@ public class RuleVisitorParser implements Parser {
       );
     }
 
+    @Override
     public Expression visitAssignExpr(RuleParser.AssignExprContext ctx) {
       return new Expr.AssignExpr(
           (Expr) ctx.getChild(0).accept(this),
@@ -310,6 +353,7 @@ public class RuleVisitorParser implements Parser {
 
   private static class FunctionArgsVisitor extends RuleBaseVisitor<List<Expr>> {
 
+    @Override
     public List<Expr> visitFunctionArgs(RuleParser.FunctionArgsContext ctx) {
       ExpressionVisitor visitor = new ExpressionVisitor();
       return ctx.expr().stream()

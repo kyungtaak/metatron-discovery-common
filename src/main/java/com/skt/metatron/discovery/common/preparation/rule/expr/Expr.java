@@ -7,6 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * Created by kyungtaak on 2017. 3. 5..
@@ -19,29 +20,6 @@ public interface Expr extends Expression {
     Object get(String name);
   }
 
-  class IdentifierExpr implements Expr {
-
-    private final String value;
-
-    public IdentifierExpr(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return value;
-    }
-
-    @Override
-    public ExprEval eval(NumericBinding bindings) {
-      return ExprEval.bestEffortOf(bindings.get(value));
-    }
-  }
-
   class AssignExpr implements Expr {
     final Expr assignee;
     final Expr assigned;
@@ -49,6 +27,14 @@ public interface Expr extends Expression {
     public AssignExpr(Expr assignee, Expr assigned) {
       this.assignee = assignee;
       this.assigned = assigned;
+    }
+
+    public Expr getAssignee() {
+      return assignee;
+    }
+
+    public Expr getAssigned() {
+      return assigned;
     }
 
     @Override
@@ -83,12 +69,16 @@ public interface Expr extends Expression {
 
     @Override
     public String toString() {
-      return "(" + name + " " + args + ")";
+      List<String> argsExprs = args.stream()
+          .map(expr -> expr.toString())
+          .collect(Collectors.toList());
+
+      return name + "(" + StringUtils.join(argsExprs, ",") + ")";
     }
 
     @Override
     public ExprEval eval(NumericBinding bindings) {
-      return function.apply(args, bindings);
+      return null;
     }
   }
 
@@ -172,13 +162,11 @@ public interface Expr extends Expression {
 
     @Override
     public String toString() {
-      return "(" + op + " " + left + " " + right + ")";
+      return "(" + left + " " + op + " " + right + ")";
     }
   }
 
   abstract class BinaryNumericOpExprBase extends BinaryOpExprBase {
-
-
 
     public BinaryNumericOpExprBase(String op, Expr left, Expr right) {
       super(op, left, right);
@@ -210,7 +198,7 @@ public interface Expr extends Expression {
 
     @Override
     public String toString() {
-      return "(" + op + " " + left + " " + right + ")";
+      return "(" + left + " " + op + " " + right + ")";
     }
   }
 
@@ -229,6 +217,7 @@ public interface Expr extends Expression {
     protected final double evalDouble(double left, double right) {
       return left - right;
     }
+
   }
 
   class BinPowExpr extends BinaryNumericOpExprBase {

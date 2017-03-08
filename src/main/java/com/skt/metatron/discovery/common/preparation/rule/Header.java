@@ -31,4 +31,11 @@ public class Header implements Rule, Rule.Factory {
   public Rule get() {
     return new Header();
   }
+
+  @Override
+  public String toString() {
+    return "Header{" +
+        "rownum=" + rownum +
+        '}';
+  }
 }

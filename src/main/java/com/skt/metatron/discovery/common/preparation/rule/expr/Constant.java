@@ -2,6 +2,9 @@ package com.skt.metatron.discovery.common.preparation.rule.expr;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
  * Created by kyungtaak on 2017. 3. 5..
  */
@@ -74,6 +77,56 @@ public interface Constant extends Expr {
     @Override
     public ExprEval eval(NumericBinding bindings) {
       return ExprEval.of(value, ExprType.DOUBLE);
+    }
+  }
+
+  class ArrayExpr<T> implements Constant {
+
+    private final List<T> value;
+
+    public ArrayExpr(List<T> value) {
+      this.value = value;
+    }
+
+    @Override
+    public List<T> getValue() {
+      return value;
+    }
+
+    @Override
+    public String toString() {
+      return value == null ? "null" : value.toString();
+    }
+
+    @Override
+    public ExprEval eval(NumericBinding bindings) {
+      return null;
+    }
+  }
+
+  class StringArrayExpr implements Constant {
+
+    private final List<String> value;
+
+    public StringArrayExpr(List<String> value) {
+      this.value = value.stream()
+          .map(s -> StringUtils.substring(s, 1, s.length() - 1))
+          .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<String> getValue() {
+      return value;
+    }
+
+    @Override
+    public String toString() {
+      return value == null ? "null" : value.toString();
+    }
+
+    @Override
+    public ExprEval eval(NumericBinding bindings) {
+      return null;
     }
   }
 }

@@ -40,4 +40,12 @@ public class Rename implements Rule, Rule.Factory {
   public Rule get() {
     return new Rename();
   }
+
+  @Override
+  public String toString() {
+    return "Rename{" +
+        "col='" + col + '\'' +
+        ", to='" + to + '\'' +
+        '}';
+  }
 }

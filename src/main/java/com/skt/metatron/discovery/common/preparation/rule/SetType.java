@@ -40,4 +40,12 @@ public class SetType implements Rule, Rule.Factory {
   public Rule get() {
     return new SetType();
   }
+
+  @Override
+  public String toString() {
+    return "SetType{" +
+        "col='" + col + '\'' +
+        ", type='" + type + '\'' +
+        '}';
+  }
 }

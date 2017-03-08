@@ -63,7 +63,7 @@ public class Evals {
 
   static String getIdentifier(Expr arg)
   {
-    if (!(arg instanceof Expr.IdentifierExpr)) {
+    if (!(arg instanceof Identifier.IdentifierExpr)) {
       throw new RuntimeException(arg + " is not identifier");
     }
     return arg.toString();

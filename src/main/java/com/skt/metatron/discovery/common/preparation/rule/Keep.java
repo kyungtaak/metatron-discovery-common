@@ -33,4 +33,11 @@ public class Keep implements Rule, Rule.Factory {
   public Rule get() {
     return new Keep();
   }
+
+  @Override
+  public String toString() {
+    return "Keep{" +
+        "row=" + row +
+        '}';
+  }
 }
