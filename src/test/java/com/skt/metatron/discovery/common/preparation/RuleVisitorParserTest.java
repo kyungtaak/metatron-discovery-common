@@ -54,6 +54,13 @@ public class RuleVisitorParserTest {
     runAndPrint(ruleCode);
   }
 
+  @Test
+  public void setTypeTest() {
+    String ruleCode = "settype col: Category type: 'Integer'";
+
+    runAndPrint(ruleCode);
+  }
+
   private void runAndPrint(String ruleCode) {
 
     Rule rule = new RuleVisitorParser().parse(ruleCode);

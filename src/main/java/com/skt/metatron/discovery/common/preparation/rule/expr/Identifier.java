@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Created by kyungtaak on 2017. 3. 8..
  */
-public interface Identifier extends Expr {
+public interface Identifier extends Constant {
 
   class IdentifierExpr implements Identifier {
 
