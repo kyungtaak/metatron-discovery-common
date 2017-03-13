@@ -25,6 +25,7 @@ public class RuleBuilder {
     ruleNameMapper.put("rename", () -> new Rename());
     ruleNameMapper.put("keep", () -> new Keep());
     ruleNameMapper.put("set", () -> new Set());
+    ruleNameMapper.put("derive", () -> new Derive());
   }
 
   String ruleName;

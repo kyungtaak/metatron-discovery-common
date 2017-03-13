@@ -61,6 +61,13 @@ public class RuleVisitorParserTest {
     runAndPrint(ruleCode);
   }
 
+  @Test
+  public void deriveTest() {
+    String ruleCode = "derive value: if(column3 == 'Furniture', true, false) as: 'cate_if'";
+
+    runAndPrint(ruleCode);
+  }
+
   private void runAndPrint(String ruleCode) {
 
     Rule rule = new RuleVisitorParser().parse(ruleCode);
