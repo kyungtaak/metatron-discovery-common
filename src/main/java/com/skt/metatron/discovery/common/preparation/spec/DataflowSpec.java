@@ -50,7 +50,7 @@ public class DataflowSpec implements Serializable {
   /**
    * DataSet 별 Rule 정의, Temp Table 지정
    */
-  public class RuleByDataSet {
+  public static class RuleByDataSet {
 
     String id;
 
@@ -120,7 +120,7 @@ public class DataflowSpec implements Serializable {
     }
   }
 
-  public class Field {
+  public static class Field {
     /**
      * Field Name
      */
@@ -154,7 +154,7 @@ public class DataflowSpec implements Serializable {
   /**
    * SQL Builder 내에서 지정한 Result Table 정보 저장
    */
-  public class ResultTable {
+  public static class ResultTable {
 
     String name;
 

@@ -57,6 +57,29 @@ public interface Constant extends Expr {
     }
   }
 
+  class BooleanExpr implements Constant {
+
+    private final boolean value;
+
+    public BooleanExpr(boolean value) {
+      this.value = value;
+    }
+
+    public Object getValue() {
+      return value;
+    }
+
+    @Override
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    @Override
+    public ExprEval eval(NumericBinding bindings) {
+      return ExprEval.of(value, ExprType.LONG);
+    }
+  }
+
   class ArrayExpr<T> implements Constant {
 
     private final List<T> value;
@@ -86,7 +109,11 @@ public interface Constant extends Expr {
     private final String value;
 
     public StringExpr(String value) {
-      this.value = StringUtils.substring(value, 1, value.length() - 1);
+      this.value = value;
+    }
+
+    public String getEscapedValue() {
+      return StringUtils.substring(value, 1, value.length() - 1);
     }
 
     public Object getValue() {
@@ -110,7 +137,11 @@ public interface Constant extends Expr {
     private final List<String> value;
 
     public StringArrayExpr(List<String> value) {
-      this.value = value.stream()
+      this.value = value;
+    }
+
+    public List<String> getEscapedValue() {
+      return value.stream()
           .map(s -> StringUtils.substring(s, 1, s.length() - 1))
           .collect(Collectors.toList());
     }
