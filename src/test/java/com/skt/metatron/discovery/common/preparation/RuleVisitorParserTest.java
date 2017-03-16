@@ -63,7 +63,8 @@ public class RuleVisitorParserTest {
 
   @Test
   public void deriveTest() {
-    String ruleCode = "derive value: if(column3 == 'Furniture', true, false) as: 'cate_if'";
+//    String ruleCode = "derive value: if(column3 == 'Furniture', true, false) as: 'cate_if'";
+    String ruleCode = "derive value: if(category == 'Furniture', true, false) as: 'cate_if'";
 
     runAndPrint(ruleCode);
   }
