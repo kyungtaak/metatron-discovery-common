@@ -1,11 +1,16 @@
 package com.skt.metatron.discovery.common.preparation.spec;
 
+import com.clearspring.analytics.util.Lists;
 import com.skt.metatron.discovery.common.datasource.FieldType;
+import com.skt.metatron.discovery.common.preparation.RuleVisitorParser;
+import com.skt.metatron.discovery.common.preparation.rule.Rule;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.spark.sql.DataFrame;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Dataflow 표현하는 Spec. 정의
@@ -59,6 +64,20 @@ public class DataflowSpec implements Serializable {
 
     public RuleByDataSet() {
     }
+
+    public List<Rule> parsedRules() {
+
+      if(CollectionUtils.isEmpty(rules)) {
+        return Lists.newArrayList();
+      }
+
+      final RuleVisitorParser parser = new RuleVisitorParser();
+
+      return rules.stream()
+          .map(ruleScript -> parser.parse(ruleScript))
+          .collect(Collectors.toList());
+    }
+
 
     public String getId() {
       return id;
