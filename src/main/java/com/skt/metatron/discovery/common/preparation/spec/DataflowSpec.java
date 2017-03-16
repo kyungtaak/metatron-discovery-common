@@ -1,6 +1,7 @@
 package com.skt.metatron.discovery.common.preparation.spec;
 
 import com.clearspring.analytics.util.Lists;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.skt.metatron.discovery.common.datasource.FieldType;
 import com.skt.metatron.discovery.common.preparation.RuleVisitorParser;
 import com.skt.metatron.discovery.common.preparation.rule.Rule;
@@ -29,6 +30,22 @@ public class DataflowSpec implements Serializable {
   List<ResultTable> resultTables;
 
   public DataflowSpec() {
+  }
+
+  public void addRuleSet(RuleByDataSet ruleByDataSet) {
+    if(ruleSets == null) {
+      ruleSets = Lists.newArrayList();
+    }
+
+    ruleSets.add(ruleByDataSet);
+  }
+
+  public void addResultTable(ResultTable resultTable) {
+    if(resultTables == null) {
+      resultTables = Lists.newArrayList();
+    }
+
+    resultTables.add(resultTable);
   }
 
   public List<RuleByDataSet> getRuleSets() {
@@ -62,7 +79,8 @@ public class DataflowSpec implements Serializable {
 
     String tempTable;
 
-    transient DataFrame dataFrame;
+    @JsonIgnore
+    DataFrame dataFrame;
 
     public RuleByDataSet() {
     }
@@ -142,6 +160,11 @@ public class DataflowSpec implements Serializable {
     FieldType type;
 
     public Field() {
+    }
+
+    public Field(String name, FieldType type) {
+      this.name = name;
+      this.type = type;
     }
 
     public String getName() {
