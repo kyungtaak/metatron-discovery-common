@@ -52,7 +52,9 @@ public class DataflowSpec implements Serializable {
    */
   public static class RuleByDataSet {
 
-    String id;
+    String name;
+
+    String datasetId;
 
     List<String> rules;
 
@@ -79,12 +81,20 @@ public class DataflowSpec implements Serializable {
     }
 
 
-    public String getId() {
-      return id;
+    public String getName() {
+      return name;
     }
 
-    public void setId(String id) {
-      this.id = id;
+    public void setName(String name) {
+      this.name = name;
+    }
+
+    public String getDatasetId() {
+      return datasetId;
+    }
+
+    public void setDatasetId(String datasetId) {
+      this.datasetId = datasetId;
     }
 
     public List<String> getRules() {
