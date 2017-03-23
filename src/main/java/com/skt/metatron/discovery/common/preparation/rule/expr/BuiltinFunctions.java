@@ -520,6 +520,24 @@ public interface BuiltinFunctions extends Function.Library {
 
   }
 
+  class ToDateFunc implements Function {
+    @Override
+    public String name() {
+      return "to_date";
+    }
+
+    @Override
+    public boolean validate(List<Expr> args) {
+      if (args.size() == 1) {
+        LOGGER.warn("function 'datediff' needs 1 arguments");
+        return false;
+      }
+
+      return true;
+    }
+
+  }
+
   class CaseWhenFunc implements Function {
     @Override
     public String name() {

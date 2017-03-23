@@ -1,16 +1,23 @@
 package com.skt.metatron.discovery.common.preparation.spec;
 
+import com.google.common.collect.Maps;
+
 import com.clearspring.analytics.util.Lists;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.skt.metatron.discovery.common.datasource.FieldType;
 import com.skt.metatron.discovery.common.preparation.RuleVisitorParser;
 import com.skt.metatron.discovery.common.preparation.rule.Rule;
 
+import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.spark.sql.DataFrame;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import java.beans.PropertyDescriptor;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -69,6 +76,8 @@ public class DataflowSpec implements Serializable {
    */
   public static class RuleByDataSet {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(RuleByDataSet.class);
+
     String name;
 
     String datasetId;
@@ -77,7 +86,7 @@ public class DataflowSpec implements Serializable {
 
     List<Field> fields;
 
-    String tempTable;
+    String table;
 
     @JsonIgnore
     DataFrame dataFrame;
@@ -96,6 +105,35 @@ public class DataflowSpec implements Serializable {
       return rules.stream()
           .map(ruleScript -> parser.parse(ruleScript))
           .collect(Collectors.toList());
+    }
+
+    public List<Map<String, String>> ruleList() {
+
+      List<Map<String, String>> resultRules = Lists.newArrayList();
+
+      List<Rule> rules = parsedRules();
+      for(Rule rule : rules) {
+        Map<String, String> argMap = Maps.newLinkedHashMap();
+
+        PropertyDescriptor[] descriptors =  PropertyUtils.getPropertyDescriptors(rule);
+        for(PropertyDescriptor descriptor : descriptors) {
+          String argName = descriptor.getName();
+          if("class".equals(argName)) {
+            continue;
+          }
+
+          try {
+            argMap.put(argName, PropertyUtils.getProperty(rule, argName).toString());
+          } catch (Exception e) {
+            LOGGER.warn("Fail to get property({}) value.", argName);
+            continue;
+          }
+        }
+
+        resultRules.add(argMap);
+      }
+
+      return resultRules;
     }
 
 
@@ -131,12 +169,12 @@ public class DataflowSpec implements Serializable {
       this.fields = fields;
     }
 
-    public String getTempTable() {
-      return tempTable;
+    public String getTable() {
+      return table;
     }
 
-    public void setTempTable(String tempTable) {
-      this.tempTable = tempTable;
+    public void setTable(String table) {
+      this.table = table;
     }
 
     public DataFrame getDataFrame() {
@@ -193,6 +231,15 @@ public class DataflowSpec implements Serializable {
 
     String sql;
 
+    String schema;
+
+    String table;
+
+    /**
+     * 컬럼 원본명 이 Key 가 되고 Alias 값이 Value 로 셋팅
+     */
+    Map<String, String> columns;
+
     public ResultTable() {
     }
 
@@ -210,6 +257,30 @@ public class DataflowSpec implements Serializable {
 
     public void setSql(String sql) {
       this.sql = sql;
+    }
+
+    public String getSchema() {
+      return schema;
+    }
+
+    public void setSchema(String schema) {
+      this.schema = schema;
+    }
+
+    public String getTable() {
+      return table;
+    }
+
+    public void setTable(String table) {
+      this.table = table;
+    }
+
+    public Map<String, String> getColumns() {
+      return columns;
+    }
+
+    public void setColumns(Map<String, String> columns) {
+      this.columns = columns;
     }
   }
 }
