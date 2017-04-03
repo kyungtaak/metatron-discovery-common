@@ -16,6 +16,7 @@ import com.skt.metatron.discovery.common.preparation.rule.expr.Expr;
 import com.skt.metatron.discovery.common.preparation.rule.expr.Expression;
 import com.skt.metatron.discovery.common.preparation.rule.expr.Function;
 import com.skt.metatron.discovery.common.preparation.rule.expr.Identifier;
+import com.skt.metatron.discovery.common.preparation.rule.expr.RegularExpr;
 
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CharStream;
@@ -116,6 +117,11 @@ public class RuleVisitorParser implements Parser {
     @Override
     public Expression visitStringExpr(RuleParser.StringExprContext ctx) {
       return new Constant.StringExpr(ctx.getText());
+    }
+
+    @Override
+    public Expression visitRegularExprExpr(RuleParser.RegularExprExprContext ctx) {
+      return new RegularExpr(ctx.getText());
     }
 
     @Override

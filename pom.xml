@@ -215,7 +215,7 @@
     <distributionManagement>
         <snapshotRepository>
             <id>metatron-nexus-snapshots</id>
-            <url>http://52.187.131.206/nexus/content/repositories/snapshots</url>
+            <url>http://52.79.212.190:8081/nexus/content/repositories/snapshots</url>
         </snapshotRepository>
     </distributionManagement>
 </project>

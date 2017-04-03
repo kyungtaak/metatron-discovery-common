@@ -20,6 +20,7 @@ expr : ('-'|'!') expr                                 # unaryOpExpr
      | DOUBLE                                         # doubleExpr
      | LONG                                           # longExpr
      | STRING                                         # stringExpr
+     | REGEX                                          # regularExprExpr
      | IDENTIFIER (',' IDENTIFIER)+                   # identifierArrayExpr
      | STRING (',' STRING)+                           # stringArrayExpr
      | LONG (',' LONG)+                               # longArrayExpr
@@ -30,14 +31,15 @@ fnArgs : expr (',' expr)*                             # functionArgs
        ;
 
 WS : [ \t\r\n]+ -> skip ;
-RULE_NAME : ('drop' | 'header' | 'settype' | 'rename' | 'keep' | 'set' | 'derive');
-ARG_NAME : ('col' | 'row' | 'type' | 'rownum' | 'to' | 'value' | 'as');
+RULE_NAME : ('drop' | 'header' | 'settype' | 'rename' | 'keep' | 'set' | 'derive' | 'replace');
+ARG_NAME : ('col' | 'row' | 'type' | 'rownum' | 'to' | 'value' | 'as' | 'on' | 'after' | 'before' | 'global' | 'with');
 IDENTIFIER : [_$a-zA-Z\uAC00-\uD7AF][._$a-zA-Z0-9\[\]\uAC00-\uD7AF]* | '"' ~["]+ '"' ;
 LONG : [0-9]+ ;
 DOUBLE : [0-9]+ '.' [0-9]* ;
 TRUE : 'true';
 FALSE : 'false';
 STRING : '\'' (ESC | ~ [\'\\])* '\'';
+REGEX : '/' (ESC | ~ [\'/])* '/';
 fragment ESC : '\\' ([\'\\/bfnrt] | UNICODE) ;
 fragment UNICODE : 'u' HEX HEX HEX HEX ;
 fragment HEX : [0-9a-fA-F] ;

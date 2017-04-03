@@ -70,6 +70,13 @@ public class RuleVisitorParserTest {
     runAndPrint(ruleCode);
   }
 
+  @Test
+  public void replaceTest() {
+    String ruleCode = "replace col: Category with: 'abc' on: /.*/ global: true row: sales > 10";
+
+    runAndPrint(ruleCode);
+  }
+
   private void runAndPrint(String ruleCode) {
 
     Rule rule = new RuleVisitorParser().parse(ruleCode);
