@@ -77,6 +77,27 @@ public class RuleVisitorParserTest {
     runAndPrint(ruleCode);
   }
 
+  @Test
+  public void countPatternTest() {
+    String ruleCode = "countpattern col: City on: /H.*/ ignoreCase: true";
+
+    runAndPrint(ruleCode);
+  }
+
+  @Test
+  public void splitTest() {
+    String ruleCode = "split col: column7 on: '-' limit: 2 quote: '\"' ignoreCase: true";
+
+    runAndPrint(ruleCode);
+  }
+
+  @Test
+  public void deleteTest() {
+    String ruleCode = "delete row: Sales < 10000";
+
+    runAndPrint(ruleCode);
+  }
+
   private void runAndPrint(String ruleCode) {
 
     Rule rule = new RuleVisitorParser().parse(ruleCode);

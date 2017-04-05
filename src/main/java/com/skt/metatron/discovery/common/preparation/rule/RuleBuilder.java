@@ -27,6 +27,9 @@ public class RuleBuilder {
     ruleNameMapper.put("set", () -> new Set());
     ruleNameMapper.put("derive", () -> new Derive());
     ruleNameMapper.put("replace", () -> new Replace());
+    ruleNameMapper.put("countpattern", () -> new CountPattern());
+    ruleNameMapper.put("split", () -> new Split());
+    ruleNameMapper.put("delete", () -> new Delete());
   }
 
   String ruleName;
@@ -52,7 +55,7 @@ public class RuleBuilder {
 //      }
 
       try {
-        BeanUtils.setProperty(rule, arguments.getName().toLowerCase(), arguments.getValue());
+        BeanUtils.setProperty(rule, arguments.getName(), arguments.getValue());
       } catch (IllegalAccessException | InvocationTargetException e) {
         new RuntimeException("error!" + e.getMessage());
       }
