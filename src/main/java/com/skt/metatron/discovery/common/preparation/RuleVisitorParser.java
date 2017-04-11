@@ -163,13 +163,25 @@ public class RuleVisitorParser implements Parser {
     }
 
     @Override
-    public Expression visitFunctionExpr(RuleParser.FunctionExprContext ctx) {
-      Function func = getFunctionByName(ctx.IDENTIFIER().getText());
+    public Expression visitFn(RuleParser.FnContext ctx) {
+      Function func = getFunctionByName(ctx.IDENTIFIER().toString());
 
       FunctionArgsVisitor functionArgsVisitor = new FunctionArgsVisitor();
       List<Expr> exprs = ctx.fnArgs().accept(functionArgsVisitor);
 
       return new Expr.FunctionExpr(func, func.name(), exprs);
+    }
+
+    @Override
+    public Expression visitFunctionExpr(RuleParser.FunctionExprContext ctx) {
+      return visitFn(ctx.fn());
+    }
+
+    @Override
+    public Expression visitFunctionArrayExpr(RuleParser.FunctionArrayExprContext ctx) {
+      return new Expr.FunctionArrayExpr(ctx.fn().stream()
+          .map(fnContext -> (Expr.FunctionExpr) visitFn(fnContext))
+          .collect(toList()));
     }
 
     @Override

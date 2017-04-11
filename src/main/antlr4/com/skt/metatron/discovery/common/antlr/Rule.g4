@@ -15,7 +15,8 @@ expr : ('-'|'!') expr                                 # unaryOpExpr
      | expr ('&'|'|') expr                            # logicalAndOrExpr2
      | expr '=' expr                                  # assignExpr
      | '(' expr ')'                                   # nestedExpr
-     | IDENTIFIER '(' fnArgs? ')'                     # functionExpr
+     | fn                                             # functionExpr
+     | fn (',' fn)+                                   # functionArrayExpr
      | IDENTIFIER                                     # identifierExpr
      | DOUBLE                                         # doubleExpr
      | LONG                                           # longExpr
@@ -26,13 +27,14 @@ expr : ('-'|'!') expr                                 # unaryOpExpr
      | LONG (',' LONG)+                               # longArrayExpr
      | DOUBLE (',' DOUBLE)+                           # doubleArrayExpr
      ;
-
+fn : IDENTIFIER '(' fnArgs? ')'
+   ;
 fnArgs : expr (',' expr)*                             # functionArgs
        ;
 
 WS : [ \t\r\n]+ -> skip ;
-RULE_NAME : ('drop' | 'header' | 'settype' | 'rename' | 'keep' | 'set' | 'derive' | 'replace' | 'countpattern' | 'split' | 'delete');
-ARG_NAME : ('col' | 'row' | 'type' | 'rownum' | 'to' | 'value' | 'as' | 'on' | 'after' | 'before' | 'global' | 'with' | 'ignoreCase' | 'limit' | 'quote');
+RULE_NAME : ('drop' | 'header' | 'settype' | 'rename' | 'keep' | 'set' | 'derive' | 'replace' | 'countpattern' | 'split' | 'delete' | 'pivot');
+ARG_NAME : ('col' | 'row' | 'type' | 'rownum' | 'to' | 'value' | 'as' | 'on' | 'after' | 'before' | 'global' | 'with' | 'ignoreCase' | 'limit' | 'quote' | 'group');
 IDENTIFIER : [_$a-zA-Z\uAC00-\uD7AF][._$a-zA-Z0-9\[\]\uAC00-\uD7AF]* | '"' ~["]+ '"' ;
 LONG : [0-9]+ ;
 DOUBLE : [0-9]+ '.' [0-9]* ;

@@ -23,6 +23,7 @@ import com.google.common.collect.Lists;
 
 import com.skt.metatron.discovery.common.preparation.rule.expr.Expr.NumericBinding;
 import com.skt.metatron.discovery.common.preparation.rule.expr.Function.Factory;
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -114,18 +115,6 @@ public interface BuiltinFunctions extends Function.Library {
 
   }
 
-  abstract class SingleParamMath extends SingleParam {
-
-  }
-
-  abstract class DoubleParamMath extends DoubleParam {
-
-  }
-
-  abstract class TripleParamMath extends TripleParam {
-
-  }
-
   class Regex implements Function, Factory {
     private Matcher matcher;
     private int index = -1;
@@ -150,165 +139,221 @@ public interface BuiltinFunctions extends Function.Library {
     }
   }
 
-  class Abs extends SingleParamMath {
+  abstract class AggreationFunc extends SingleParam {
+  }
+
+  class Sum extends AggreationFunc {
+
     @Override
     public String name() {
-      return "abs";
+      return "sum";
     }
   }
 
-  class Acos extends SingleParamMath {
+  class Avg extends AggreationFunc {
+
     @Override
     public String name() {
-      return "acos";
+      return "avg";
     }
   }
 
-  class Asin extends SingleParamMath {
-    @Override
-    public String name() {
-      return "asin";
-    }
-  }
+  class Max extends AggreationFunc {
 
-  class Atan extends SingleParamMath {
-    @Override
-    public String name() {
-      return "atan";
-    }
-  }
-
-  class Cbrt extends SingleParamMath {
-    @Override
-    public String name() {
-      return "cbrt";
-    }
-  }
-
-  class Ceil extends SingleParamMath {
-    @Override
-    public String name() {
-      return "ceil";
-    }
-  }
-
-  class Cos extends SingleParamMath {
-    @Override
-    public String name() {
-      return "cos";
-    }
-  }
-
-  class Cosh extends SingleParamMath {
-    @Override
-    public String name() {
-      return "cosh";
-    }
-  }
-
-  class Exp extends SingleParamMath {
-    @Override
-    public String name() {
-      return "exp";
-    }
-  }
-
-  class Expm1 extends SingleParamMath {
-    @Override
-    public String name() {
-      return "expm1";
-    }
-  }
-
-  class Floor extends SingleParamMath {
-    @Override
-    public String name() {
-      return "floor";
-    }
-  }
-
-  class GetExponent extends SingleParamMath {
-    @Override
-    public String name() {
-      return "getExponent";
-    }
-  }
-
-  class Round extends SingleParamMath {
-    @Override
-    public String name() {
-      return "round";
-    }
-  }
-
-  class Signum extends SingleParamMath {
-    @Override
-    public String name() {
-      return "signum";
-    }
-  }
-
-  class Sin extends SingleParamMath {
-    @Override
-    public String name() {
-      return "sin";
-    }
-  }
-
-  class Sinh extends SingleParamMath {
-    @Override
-    public String name() {
-      return "sinh";
-    }
-  }
-
-  class Sqrt extends SingleParamMath {
-    @Override
-    public String name() {
-      return "sqrt";
-    }
-  }
-
-  class Tan extends SingleParamMath {
-    @Override
-    public String name() {
-      return "tan";
-    }
-  }
-
-  class Tanh extends SingleParamMath {
-    @Override
-    public String name() {
-      return "tanh";
-    }
-  }
-
-  class Max extends DoubleParamMath {
     @Override
     public String name() {
       return "max";
     }
   }
 
-  class Min extends DoubleParamMath {
+  class Min extends AggreationFunc {
+
     @Override
     public String name() {
       return "min";
     }
   }
 
-  class NextAfter extends DoubleParamMath {
+  class Count extends AggreationFunc {
+
     @Override
     public String name() {
-      return "nextAfter";
+      return "count";
     }
   }
 
-  class Pow extends DoubleParamMath {
-    @Override
-    public String name() {
-      return "pow";
+  interface Math extends Function {
+
+    abstract class SingleParamMath extends SingleParam {
     }
+
+    abstract class DoubleParamMath extends DoubleParam {
+    }
+
+    abstract class TripleParamMath extends TripleParam {
+    }
+
+    class Abs extends SingleParamMath {
+      @Override
+      public String name() {
+        return "math.abs";
+      }
+    }
+
+    class Acos extends SingleParamMath {
+      @Override
+      public String name() {
+        return "math.acos";
+      }
+    }
+
+    class Asin extends SingleParamMath {
+      @Override
+      public String name() {
+        return "math.asin";
+      }
+    }
+
+    class Atan extends SingleParamMath {
+      @Override
+      public String name() {
+        return "math.atan";
+      }
+    }
+
+    class Cbrt extends SingleParamMath {
+      @Override
+      public String name() {
+        return "math.cbrt";
+      }
+    }
+
+    class Ceil extends SingleParamMath {
+      @Override
+      public String name() {
+        return "math.ceil";
+      }
+    }
+
+    class Cos extends SingleParamMath {
+      @Override
+      public String name() {
+        return "math.cos";
+      }
+    }
+
+    class Cosh extends SingleParamMath {
+      @Override
+      public String name() {
+        return "math.cosh";
+      }
+    }
+
+    class Exp extends SingleParamMath {
+      @Override
+      public String name() {
+        return "math.exp";
+      }
+    }
+
+    class Expm1 extends SingleParamMath {
+      @Override
+      public String name() {
+        return "math.expm1";
+      }
+    }
+
+    class Floor extends SingleParamMath {
+      @Override
+      public String name() {
+        return "math.floor";
+      }
+    }
+
+    class GetExponent extends SingleParamMath {
+      @Override
+      public String name() {
+        return "math.getExponent";
+      }
+    }
+
+    class Round extends SingleParamMath {
+      @Override
+      public String name() {
+        return "math.round";
+      }
+    }
+
+    class Signum extends SingleParamMath {
+      @Override
+      public String name() {
+        return "math.signum";
+      }
+    }
+
+    class Sin extends SingleParamMath {
+      @Override
+      public String name() {
+        return "math.sin";
+      }
+    }
+
+    class Sinh extends SingleParamMath {
+      @Override
+      public String name() {
+        return "math.sinh";
+      }
+    }
+
+    class Sqrt extends SingleParamMath {
+      @Override
+      public String name() {
+        return "math.sqrt";
+      }
+    }
+
+    class Tan extends SingleParamMath {
+      @Override
+      public String name() {
+        return "math.tan";
+      }
+    }
+
+    class Tanh extends SingleParamMath {
+      @Override
+      public String name() {
+        return "math.tanh";
+      }
+    }
+
+    class Max extends DoubleParamMath {
+      @Override
+      public String name() {
+        return "math.max";
+      }
+    }
+
+    class Min extends DoubleParamMath {
+      @Override
+      public String name() {
+        return "math.min";
+      }
+    }
+
+    class NextAfter extends DoubleParamMath {
+      @Override
+      public String name() {
+        return "math.nextAfter";
+      }
+    }
+
+    class Pow extends DoubleParamMath {
+      @Override
+      public String name() {
+        return "math.pow";
+      }
+    }
+
   }
 
   class ConditionFunc implements Function {

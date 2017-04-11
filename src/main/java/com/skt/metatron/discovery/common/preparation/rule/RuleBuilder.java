@@ -30,6 +30,7 @@ public class RuleBuilder {
     ruleNameMapper.put("countpattern", () -> new CountPattern());
     ruleNameMapper.put("split", () -> new Split());
     ruleNameMapper.put("delete", () -> new Delete());
+    ruleNameMapper.put("pivot", () -> new Pivot());
   }
 
   String ruleName;

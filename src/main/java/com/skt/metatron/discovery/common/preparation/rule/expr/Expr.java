@@ -20,6 +20,31 @@ public interface Expr extends Expression {
     Object get(String name);
   }
 
+  class FunctionArrayExpr implements Expr {
+
+    final List<FunctionExpr> functions;
+
+    public FunctionArrayExpr(List<FunctionExpr> functions) {
+      this.functions = functions;
+    }
+
+    public List<FunctionExpr> getFunctions() {
+      return functions;
+    }
+
+    @Override
+    public ExprEval eval(NumericBinding bindings) {
+      return null;
+    }
+
+    @Override
+    public String toString() {
+      return "FunctionArrayExpr{" +
+          "functions=" + functions +
+          '}';
+    }
+  }
+
   class AssignExpr implements Expr {
     final Expr assignee;
     final Expr assigned;
