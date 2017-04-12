@@ -105,6 +105,41 @@ public class RuleVisitorParserTest {
     runAndPrint(ruleCode);
   }
 
+  @Test
+  public void unpivotTest() {
+    String ruleCode = "unpivot col: column3,column6 groupEvery:2";
+
+    runAndPrint(ruleCode);
+  }
+
+  @Test
+  public void extractTest() {
+    String ruleCode = "extract col: column5 on: /e/ limit: 2 quote: '\''";
+
+    runAndPrint(ruleCode);
+  }
+
+  @Test
+  public void flattenTest() {
+    String ruleCode = "flatten col: column5";
+
+    runAndPrint(ruleCode);
+  }
+
+  @Test
+  public void mergeTest() {
+    String ruleCode = "merge col: column5,column6 with: ',' as: 'test'";
+
+    runAndPrint(ruleCode);
+  }
+
+  @Test
+  public void nestTest() {
+    String ruleCode = "nest col:ItemA,ItemB into:'map' as:'myMap'";
+
+    runAndPrint(ruleCode);
+  }
+
 
 
   private void runAndPrint(String ruleCode) {

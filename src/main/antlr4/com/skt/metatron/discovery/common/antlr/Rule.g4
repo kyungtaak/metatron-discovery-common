@@ -33,8 +33,8 @@ fnArgs : expr (',' expr)*                             # functionArgs
        ;
 
 WS : [ \t\r\n]+ -> skip ;
-RULE_NAME : ('drop' | 'header' | 'settype' | 'rename' | 'keep' | 'set' | 'derive' | 'replace' | 'countpattern' | 'split' | 'delete' | 'pivot');
-ARG_NAME : ('col' | 'row' | 'type' | 'rownum' | 'to' | 'value' | 'as' | 'on' | 'after' | 'before' | 'global' | 'with' | 'ignoreCase' | 'limit' | 'quote' | 'group');
+RULE_NAME : ('drop' | 'header' | 'settype' | 'rename' | 'keep' | 'set' | 'derive' | 'replace' | 'countpattern' | 'split' | 'delete' | 'pivot' | 'unpivot' | 'extract' | 'flatten' | 'merge' | 'nest' | 'unnest');
+ARG_NAME : ('col' | 'row' | 'type' | 'rownum' | 'to' | 'value' | 'as' | 'on' | 'after' | 'before' | 'global' | 'with' | 'ignoreCase' | 'limit' | 'quote' | 'group' | 'groupEvery' | 'into' | 'markLineage' | 'pluck');
 IDENTIFIER : [_$a-zA-Z\uAC00-\uD7AF][._$a-zA-Z0-9\[\]\uAC00-\uD7AF]* | '"' ~["]+ '"' ;
 LONG : [0-9]+ ;
 DOUBLE : [0-9]+ '.' [0-9]* ;

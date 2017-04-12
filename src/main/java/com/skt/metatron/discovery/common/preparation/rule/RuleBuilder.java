@@ -31,6 +31,12 @@ public class RuleBuilder {
     ruleNameMapper.put("split", () -> new Split());
     ruleNameMapper.put("delete", () -> new Delete());
     ruleNameMapper.put("pivot", () -> new Pivot());
+    ruleNameMapper.put("unpivot", () -> new Unpivot());
+    ruleNameMapper.put("extract", () -> new Extract());
+    ruleNameMapper.put("flatten", () -> new Flatten());
+    ruleNameMapper.put("merge", () -> new Merge());
+    ruleNameMapper.put("nest", () -> new Nest());
+    ruleNameMapper.put("unnest", () -> new Unnest());
   }
 
   String ruleName;
