@@ -2,6 +2,7 @@ package com.skt.metatron.discovery.common.preparation;
 
 import com.google.common.base.Supplier;
 import com.google.common.base.Suppliers;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 import com.skt.metatron.discovery.common.antlr.RuleBaseVisitor;
@@ -167,7 +168,13 @@ public class RuleVisitorParser implements Parser {
       Function func = getFunctionByName(ctx.IDENTIFIER().toString());
 
       FunctionArgsVisitor functionArgsVisitor = new FunctionArgsVisitor();
-      List<Expr> exprs = ctx.fnArgs().accept(functionArgsVisitor);
+
+      List<Expr> exprs = null;
+      if(ctx.fnArgs() != null) {
+        exprs = ctx.fnArgs().accept(functionArgsVisitor);
+      } else {
+        exprs = Lists.newArrayList();
+      }
 
       return new Expr.FunctionExpr(func, func.name(), exprs);
     }

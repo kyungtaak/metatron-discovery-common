@@ -12,7 +12,7 @@ public class Pivot implements Rule, Rule.Factory {
    * 복수개의 Pivot 대상 컬럼 (Required)
    *
    */
-  Identifier.IdentifierArrayExpr col;
+  Expression col;
 
   /**
    * Pivot 대상의 표현식 (Required)
@@ -24,7 +24,7 @@ public class Pivot implements Rule, Rule.Factory {
    * 복수개의 Group by 대상 컬럼
    *
    */
-  Identifier.IdentifierArrayExpr group;
+  Expression group;
 
   /**
    * limit of column (Optional)
@@ -35,11 +35,11 @@ public class Pivot implements Rule, Rule.Factory {
   public Pivot() {
   }
 
-  public Identifier.IdentifierArrayExpr getCol() {
+  public Expression getCol() {
     return col;
   }
 
-  public void setCol(Identifier.IdentifierArrayExpr col) {
+  public void setCol(Expression col) {
     this.col = col;
   }
 
@@ -51,11 +51,11 @@ public class Pivot implements Rule, Rule.Factory {
     this.value = value;
   }
 
-  public Identifier.IdentifierArrayExpr getGroup() {
+  public Expression getGroup() {
     return group;
   }
 
-  public void setGroup(Identifier.IdentifierArrayExpr group) {
+  public void setGroup(Expression group) {
     this.group = group;
   }
 

@@ -100,7 +100,8 @@ public class RuleVisitorParserTest {
 
   @Test
   public void pivotTest() {
-    String ruleCode = "pivot col: column3,column4 value: sum(column22),sum(column23) group: column11,column14 limit: 100";
+//    String ruleCode = "pivot col: column3,column4 value: sum(column22),sum(column23) group: column11,column14 limit: 100";
+    String ruleCode = "pivot col: birth_year value: count() group: region limit: 30";
 
     runAndPrint(ruleCode);
   }
