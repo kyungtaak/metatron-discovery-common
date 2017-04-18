@@ -64,7 +64,8 @@ public class RuleVisitorParser implements Parser {
         } catch (Exception e) {
           LOGGER.warn("Failed to instantiate " + clazz.getName() + ".. ignoring");
         }
-      }
+      } else if ( clazz.isInterface())
+        register(clazz);
     }
   }
 
