@@ -49,8 +49,9 @@ public class RuleVisitorParserTest {
 
   @Test
   public void setTest2() {
-    String ruleCode = "set col: lot_id value: lower(column) row: cnt > 5";
-
+    //String ruleCode = "set col: contract_date value: math.floor(datediff(to_date(contract_date), to_date(birth_date)))";
+    String ruleCode = "set col: name value: math.max(speed) + math.min(weight)";
+    //String ruleCode = "set col: name value: 1 row: name == 'a'";
     runAndPrint(ruleCode);
   }
 

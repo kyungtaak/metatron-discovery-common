@@ -181,179 +181,178 @@ public interface BuiltinFunctions extends Function.Library {
     }
   }
 
-  interface Math extends Function {
 
-    abstract class SingleParamMath extends SingleParam {
+
+    abstract class SingleParamMath extends SingleParam implements Function {
     }
 
-    abstract class DoubleParamMath extends DoubleParam {
+    abstract class DoubleParamMath extends DoubleParam implements Function {
     }
 
-    abstract class TripleParamMath extends TripleParam {
+    abstract class TripleParamMath extends TripleParam implements Function {
     }
 
-    class Abs extends SingleParamMath {
+    class Abs extends SingleParamMath implements Function {
       @Override
       public String name() {
         return "math.abs";
       }
     }
 
-    class Acos extends SingleParamMath {
+    class Acos extends SingleParamMath implements Function {
       @Override
       public String name() {
         return "math.acos";
       }
     }
 
-    class Asin extends SingleParamMath {
+    class Asin extends SingleParamMath implements Function {
       @Override
       public String name() {
         return "math.asin";
       }
     }
 
-    class Atan extends SingleParamMath {
+    class Atan extends SingleParamMath implements Function {
       @Override
       public String name() {
         return "math.atan";
       }
     }
 
-    class Cbrt extends SingleParamMath {
+    class Cbrt extends SingleParamMath implements Function {
       @Override
       public String name() {
         return "math.cbrt";
       }
     }
 
-    class Ceil extends SingleParamMath {
+    class Ceil extends SingleParamMath implements Function {
       @Override
       public String name() {
         return "math.ceil";
       }
     }
 
-    class Cos extends SingleParamMath {
+    class Cos extends SingleParamMath implements Function {
       @Override
       public String name() {
         return "math.cos";
       }
     }
 
-    class Cosh extends SingleParamMath {
+    class Cosh extends SingleParamMath implements Function {
       @Override
       public String name() {
         return "math.cosh";
       }
     }
 
-    class Exp extends SingleParamMath {
+    class Exp extends SingleParamMath implements Function {
       @Override
       public String name() {
         return "math.exp";
       }
     }
 
-    class Expm1 extends SingleParamMath {
+    class Expm1 extends SingleParamMath implements Function {
       @Override
       public String name() {
         return "math.expm1";
       }
     }
 
-    class Floor extends SingleParamMath {
+    class Floor extends SingleParamMath implements Function {
       @Override
       public String name() {
         return "math.floor";
       }
     }
 
-    class GetExponent extends SingleParamMath {
+    class GetExponent extends SingleParamMath implements Function {
       @Override
       public String name() {
         return "math.getExponent";
       }
     }
 
-    class Round extends SingleParamMath {
+    class Round extends SingleParamMath implements Function {
       @Override
       public String name() {
         return "math.round";
       }
     }
 
-    class Signum extends SingleParamMath {
+    class Signum extends SingleParamMath implements Function {
       @Override
       public String name() {
         return "math.signum";
       }
     }
 
-    class Sin extends SingleParamMath {
+    class Sin extends SingleParamMath implements Function {
       @Override
       public String name() {
         return "math.sin";
       }
     }
 
-    class Sinh extends SingleParamMath {
+    class Sinh extends SingleParamMath implements Function {
       @Override
       public String name() {
         return "math.sinh";
       }
     }
 
-    class Sqrt extends SingleParamMath {
+    class Sqrt extends SingleParamMath implements Function {
       @Override
       public String name() {
         return "math.sqrt";
       }
     }
 
-    class Tan extends SingleParamMath {
+    class Tan extends SingleParamMath implements Function {
       @Override
       public String name() {
         return "math.tan";
       }
     }
 
-    class Tanh extends SingleParamMath {
+    class Tanh extends SingleParamMath implements Function {
       @Override
       public String name() {
         return "math.tanh";
       }
     }
 
-    class Max extends DoubleParamMath {
+    class MathMax extends DoubleParamMath implements Function {
       @Override
       public String name() {
         return "math.max";
       }
     }
 
-    class Min extends DoubleParamMath {
+    class MathMin extends DoubleParamMath implements Function {
       @Override
       public String name() {
         return "math.min";
       }
     }
 
-    class NextAfter extends DoubleParamMath {
+    class NextAfter extends DoubleParamMath implements Function {
       @Override
       public String name() {
         return "math.nextAfter";
       }
     }
 
-    class Pow extends DoubleParamMath {
+    class Pow extends DoubleParamMath implements Function {
       @Override
       public String name() {
         return "math.pow";
       }
     }
 
-  }
 
   class ConditionFunc implements Function {
     @Override
