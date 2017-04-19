@@ -850,6 +850,23 @@ public interface BuiltinFunctions extends Function.Library {
     }
   }
 
+  class SubstringFunc implements Function {
+    @Override
+    public String name() {
+      return "substring";
+    }
+
+    @Override
+    public boolean validate(List<Expr> args) {
+      if (args.size() != 3) {
+        LOGGER.warn("function 'substring' needs 3 argument");
+        return false;
+      }
+
+      return true;
+    }
+  }
+
   class LeftFunc implements Function {
     @Override
     public String name() {
