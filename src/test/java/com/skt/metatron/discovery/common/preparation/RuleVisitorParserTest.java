@@ -66,14 +66,14 @@ public class RuleVisitorParserTest {
   public void deriveTest() {
 //    String ruleCode = "derive value: if(column3 == 'Furniture', true, false) as: 'cate_if'";
 //    String ruleCode = "derive value: if(category == 'Furniture', true, false) as: 'cate_if'";
-    String ruleCode = "derive value: substring(name, 1, 2) as: cate_if";
+    String ruleCode = "derive value: substring(name, 1, 2)/10/3 as: cate_if";
 
     runAndPrint(ruleCode);
   }
 
   @Test
   public void replaceTest() {
-    String ruleCode = "replace col: Category with: 'abc' on: /.*/ global: true row: sales > 10";
+    String ruleCode = "replace col: Category with: 'abc' on: '/.*/' global: true row: sales > 10";
 
     runAndPrint(ruleCode);
   }

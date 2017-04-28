@@ -21,7 +21,7 @@ public class RegularExpr implements Expr {
   }
 
   public String getEscapedValue() {
-    return StringUtils.substring(value, 1, value.length() - 1);
+    return StringUtils.substring(value, 2, value.length() - 2);
   }
 
   @Override
