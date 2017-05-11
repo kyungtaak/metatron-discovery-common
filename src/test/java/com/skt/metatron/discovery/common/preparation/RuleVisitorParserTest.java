@@ -50,7 +50,7 @@ public class RuleVisitorParserTest {
   @Test
   public void setTest2() {
     //String ruleCode = "set col: contract_date value: math.floor(datediff (to_date(contract_date), to_date(birth_date))/365.25/10)";
-    String ruleCode = "set col: 'name' value: if(`item-1`, 1, 2) row: name == 'a'";
+    String ruleCode = "set col: 'name' value: if(item, 1, 2) row: name == 'a'";
     runAndPrint(ruleCode);
   }
 
