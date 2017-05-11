@@ -71,6 +71,7 @@ public class RuleVisitorParser implements Parser {
 
   @Override
   public Rule parse(String code) {
+    code = code.replaceAll("\\\\", "\\\\\\\\");
     CharStream charStream = new ANTLRInputStream(code);
     RuleLexer lexer = new RuleLexer(charStream);
     TokenStream tokens = new CommonTokenStream(lexer);

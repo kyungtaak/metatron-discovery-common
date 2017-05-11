@@ -49,8 +49,8 @@ public class RuleVisitorParserTest {
 
   @Test
   public void setTest2() {
-    String ruleCode = "set col: contract_date value: math.floor(datediff (to_date(contract_date), to_date(birth_date)))/365.25/10";
-    //String ruleCode = "set col: name value: 1 row: name == 'a'";
+    //String ruleCode = "set col: contract_date value: math.floor(datediff (to_date(contract_date), to_date(birth_date))/365.25/10)";
+    String ruleCode = "set col: name value: if(`item-1`, 1, 2) row: name == 'a'";
     runAndPrint(ruleCode);
   }
 
@@ -72,7 +72,7 @@ public class RuleVisitorParserTest {
 
   @Test
   public void replaceTest() {
-    String ruleCode = "replace col: Category with: 'abc' on: '/.*/' global: true row: sales > 10";
+    String ruleCode = "replace col: Category with: 'abc' on: //\\d{3}/ global: true row: sales > 10";
 
     runAndPrint(ruleCode);
   }
@@ -136,7 +136,7 @@ public class RuleVisitorParserTest {
 
   @Test
   public void nestTest() {
-    String ruleCode = "nest col:ItemA,ItemB into:'map' as:'myMap'";
+    String ruleCode = "nest col:ItemA into:'map' as:'myMap'";
 
     runAndPrint(ruleCode);
   }

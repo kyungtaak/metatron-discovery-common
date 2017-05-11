@@ -1,6 +1,6 @@
 package com.skt.metatron.discovery.common.preparation.rule;
 
-import com.skt.metatron.discovery.common.preparation.rule.expr.Identifier;
+import com.skt.metatron.discovery.common.preparation.rule.expr.Expression;
 
 /**
  * Created by kyungtaak on 2017. 3. 5..
@@ -11,7 +11,7 @@ public class Nest implements Rule, Rule.Factory {
    * Nest 할 대상 필드 (1개 이상)
    *
    */
-  Identifier.IdentifierArrayExpr col;
+  Expression col;
 
   /**
    * Nest 대상 타입 (map, array)
@@ -28,17 +28,17 @@ public class Nest implements Rule, Rule.Factory {
   public Nest() {
   }
 
-  public Nest(Identifier.IdentifierArrayExpr col, String into, String as) {
+  public Nest(Expression col, String into, String as) {
     this.col = col;
     this.into = into;
     this.as = as;
   }
 
-  public Identifier.IdentifierArrayExpr getCol() {
+  public Expression getCol() {
     return col;
   }
 
-  public void setCol(Identifier.IdentifierArrayExpr col) {
+  public void setCol(Expression col) {
     this.col = col;
   }
 
