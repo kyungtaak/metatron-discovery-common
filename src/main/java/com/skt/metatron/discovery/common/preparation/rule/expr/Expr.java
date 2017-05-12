@@ -21,6 +21,15 @@ public interface Expr extends Expression {
   }
 
   class FunctionArrayExpr implements Expr {
+    public Expr getLeft() {
+      return null;
+    }
+    public Expr getRight() {
+      return null;
+    }
+    public String getOp() {
+      return null;
+    }
 
     final List<FunctionExpr> functions;
 
@@ -48,6 +57,16 @@ public interface Expr extends Expression {
   class AssignExpr implements Expr {
     final Expr assignee;
     final Expr assigned;
+
+    public Expr getLeft() {
+      return null;
+    }
+    public Expr getRight() {
+      return null;
+    }
+    public String getOp() {
+      return null;
+    }
 
     public AssignExpr(Expr assignee, Expr assigned) {
       this.assignee = assignee;
@@ -77,6 +96,16 @@ public interface Expr extends Expression {
     final Function function;
     final String name;
     final List<Expr> args;
+
+    public Expr getLeft() {
+      return null;
+    }
+    public Expr getRight() {
+      return null;
+    }
+    public String getOp() {
+      return null;
+    }
 
     public FunctionExpr(Function function, String name, List<Expr> args) {
       this.function = function;
@@ -110,6 +139,16 @@ public interface Expr extends Expression {
   class UnaryMinusExpr implements Expr {
     final Expr expr;
 
+    public Expr getLeft() {
+      return null;
+    }
+    public Expr getRight() {
+      return null;
+    }
+    public String getOp() {
+      return null;
+    }
+
     public UnaryMinusExpr(Expr expr) {
       this.expr = expr;
     }
@@ -134,6 +173,16 @@ public interface Expr extends Expression {
 
   class UnaryNotExpr implements Expr, Expression.NotExpression {
     final Expr expr;
+
+    public Expr getLeft() {
+      return null;
+    }
+    public Expr getRight() {
+      return null;
+    }
+    public String getOp() {
+      return null;
+    }
 
     public UnaryNotExpr(Expr expr) {
       this.expr = expr;

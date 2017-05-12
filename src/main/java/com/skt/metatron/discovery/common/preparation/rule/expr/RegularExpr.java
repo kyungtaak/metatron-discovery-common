@@ -12,6 +12,16 @@ public class RegularExpr implements Expr {
 
   private final String value;
 
+  public Expr getLeft() {
+    return null;
+  }
+  public Expr getRight() {
+    return null;
+  }
+  public String getOp() {
+    return null;
+  }
+
   public RegularExpr(String value) {
     this.value = value;
   }

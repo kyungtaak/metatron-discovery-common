@@ -28,7 +28,7 @@ public class RuleVisitorParserTest {
 
   @Test
   public void renameTest() {
-    String ruleCode = "rename col: 'test' to: 'abc'";
+    String ruleCode = "rename col: test to: 'abc'";
 
     runAndPrint(ruleCode);
   }
@@ -50,13 +50,13 @@ public class RuleVisitorParserTest {
   @Test
   public void setTest2() {
     //String ruleCode = "set col: contract_date value: math.floor(datediff (to_date(contract_date), to_date(birth_date))/365.25/10)";
-    String ruleCode = "set col: 'name' value: if(item, 1, 2) row: name == 'a'";
+    String ruleCode = "set col: name value: if(item, 1, 2) row: name == 'a'";
     runAndPrint(ruleCode);
   }
 
   @Test
   public void setTypeTest() {
-    String ruleCode = "settype col: 'Category' type: 'Integer'";
+    String ruleCode = "settype col: Category type: 'Integer'";
 
     runAndPrint(ruleCode);
   }
@@ -72,21 +72,21 @@ public class RuleVisitorParserTest {
 
   @Test
   public void replaceTest() {
-    String ruleCode = "replace col: 'Category' with: 'abc' on: //\\d{3}/ global: true row: sales > 10";
+    String ruleCode = "replace col: Category with: 'abc' on: //\\d{3}/ global: true row: sales > 10";
 
     runAndPrint(ruleCode);
   }
 
   @Test
   public void countPatternTest() {
-    String ruleCode = "countpattern col: 'City' on: /H.*/ ignoreCase: true";
+    String ruleCode = "countpattern col: City on: /H.*/ ignoreCase: true";
 
     runAndPrint(ruleCode);
   }
 
   @Test
   public void splitTest() {
-    String ruleCode = "split col: 'column7' on: '-' limit: 2 quote: '\"' ignoreCase: true";
+    String ruleCode = "split col: column7 on: '-' limit: 2 quote: '\"' ignoreCase: true";
 
     runAndPrint(ruleCode);
   }
@@ -101,42 +101,42 @@ public class RuleVisitorParserTest {
   @Test
   public void pivotTest() {
 //    String ruleCode = "pivot col: column3,column4 value: sum(column22),sum(column23) group: column11,column14 limit: 100";
-    String ruleCode = "pivot col: 'birth_year' value: count() group: 'region' limit: 30";
+    String ruleCode = "pivot col: birth_year value: count() group: region limit: 30";
 
     runAndPrint(ruleCode);
   }
 
   @Test
   public void unpivotTest() {
-    String ruleCode = "unpivot col: 'column3','column6' groupEvery:2";
+    String ruleCode = "unpivot col: column3,column6 groupEvery:2";
 
     runAndPrint(ruleCode);
   }
 
   @Test
   public void extractTest() {
-    String ruleCode = "extract col: 'column5' on: /e/ limit: 2 quote: '\''";
+    String ruleCode = "extract col: column5 on: /e/ limit: 2 quote: '\''";
 
     runAndPrint(ruleCode);
   }
 
   @Test
   public void flattenTest() {
-    String ruleCode = "flatten col: 'column5'";
+    String ruleCode = "flatten col: column5";
 
     runAndPrint(ruleCode);
   }
 
   @Test
   public void mergeTest() {
-    String ruleCode = "merge col: 'column5','column6' with: ',' as: 'test'";
+    String ruleCode = "merge col: column5,column6 with: ',' as: 'test'";
 
     runAndPrint(ruleCode);
   }
 
   @Test
   public void nestTest() {
-    String ruleCode = "nest col: 'ItemA','ItemB' into:'map' as:'myMap'";
+    String ruleCode = "nest col: ItemA,ItemB into:'map' as:'myMap'";
 
     runAndPrint(ruleCode);
   }

@@ -12,6 +12,16 @@ public interface Identifier extends Constant {
 
     private final String value;
 
+    public Expr getLeft() {
+      return null;
+    }
+    public Expr getRight() {
+      return null;
+    }
+    public String getOp() {
+      return null;
+    }
+
     public IdentifierExpr(String value) {
       this.value = value;
     }
@@ -35,6 +45,16 @@ public interface Identifier extends Constant {
   class IdentifierArrayExpr implements Identifier {
 
     private final List<String> value;
+
+    public Expr getLeft() {
+      return null;
+    }
+    public Expr getRight() {
+      return null;
+    }
+    public String getOp() {
+      return null;
+    }
 
     public IdentifierArrayExpr(List<String> value) {
       this.value = value;
