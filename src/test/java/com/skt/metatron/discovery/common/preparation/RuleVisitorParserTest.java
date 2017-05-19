@@ -141,6 +141,13 @@ public class RuleVisitorParserTest {
     runAndPrint(ruleCode);
   }
 
+  @Test
+  public void joinTest() {
+    String ruleCode = "join left: ItemA,ItemB,ItemC right: ItemD,ItemE condition: ItemF, ItemG joinType: 'inner'";
+
+    runAndPrint(ruleCode);
+  }
+
 
 
   private void runAndPrint(String ruleCode) {

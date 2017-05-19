@@ -37,6 +37,7 @@ public class RuleBuilder {
     ruleNameMapper.put("merge", () -> new Merge());
     ruleNameMapper.put("nest", () -> new Nest());
     ruleNameMapper.put("unnest", () -> new Unnest());
+    ruleNameMapper.put("join", () -> new Join());
   }
 
   String ruleName;
