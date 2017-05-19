@@ -7,36 +7,45 @@ import com.skt.metatron.discovery.common.preparation.rule.expr.Expression;
  */
 public class Join implements Rule, Rule.Factory {
 
-  Expression left;
-  Expression rigth;
-  Expression condition;
+  Expression leftSelectCol;
+  Expression rigthSelectCol;
+  Expression lhs;
+  Expression rhs;
   String joinType;
 
   public Join() {
   }
 
-  public Expression getLeft() {
-    return left;
+  public Expression getLeftSelectCol() {
+    return leftSelectCol;
   }
 
-  public void setLeft(Expression left) {
-    this.left = left;
+  public void setLeftSelectCol(Expression leftSelectCol) {
+    this.leftSelectCol = leftSelectCol;
   }
 
-  public Expression getRigth() {
-    return rigth;
+  public Expression getRigthSelectCol() {
+    return rigthSelectCol;
   }
 
-  public void setRigth(Expression rigth) {
-    this.rigth = rigth;
+  public void setRigthSelectCol(Expression rigthSelectCol) {
+    this.rigthSelectCol = rigthSelectCol;
   }
 
-  public Expression getCondition() {
-    return condition;
+  public Expression getLhs() {
+    return lhs;
   }
 
-  public void setCondition(Expression condition) {
-    this.condition = condition;
+  public void setLhs(Expression lhs) {
+    this.lhs = lhs;
+  }
+
+  public Expression getRhs() {
+    return rhs;
+  }
+
+  public void setRhs(Expression rhs) {
+    this.rhs = rhs;
   }
 
   public String getJoinType() {
@@ -60,10 +69,11 @@ public class Join implements Rule, Rule.Factory {
   @Override
   public String toString() {
     return "Join{" +
-        "left=" + left +
-        ", right=" + rigth +
-        ", condition=" + condition +
-        ", joinTye='" + joinType + '\'' +
+        "leftSelectCol=" + leftSelectCol +
+        ", lhs=" + lhs +
+        ", rigthSelectCol=" + rigthSelectCol +
+        ", rhs=" + rhs +
+        ", joinType='" + joinType + '\'' +
         '}';
   }
 }

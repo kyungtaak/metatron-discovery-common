@@ -115,7 +115,7 @@ public class RuleVisitorParserTest {
 
   @Test
   public void extractTest() {
-    String ruleCode = "extract col: column5 on: /e/ limit: 2 quote: '\''";
+    String ruleCode = "extract col: column5 on: //e/ limit: 2 quote: '\''";
 
     runAndPrint(ruleCode);
   }
@@ -143,12 +143,10 @@ public class RuleVisitorParserTest {
 
   @Test
   public void joinTest() {
-    String ruleCode = "join left: ItemA,ItemB,ItemC right: ItemD,ItemE condition: ItemF, ItemG joinType: 'inner'";
+    String ruleCode = "join leftSelectCol: ItemA,ItemB,ItemC rigthSelectCol: ItemD,ItemE lhs: ItemF, ItemG rhs: ItemH, ItemI joinType: 'inner'";
 
     runAndPrint(ruleCode);
   }
-
-
 
   private void runAndPrint(String ruleCode) {
 
