@@ -143,7 +143,7 @@ public class RuleVisitorParserTest {
 
   @Test
   public void joinTest() {
-    String ruleCode = "join leftSelectCol: ItemA,ItemB,ItemC rigthSelectCol: ItemD,ItemE lhs: ItemF, ItemG rhs: ItemH, ItemI joinType: 'inner'";
+    String ruleCode = "join leftSelectCol: ItemA,ItemB,ItemC rigthSelectCol: ItemD,ItemE condition: ItemF=ItemG && ItemH=ItemI joinType: 'inner'";
 
     runAndPrint(ruleCode);
   }

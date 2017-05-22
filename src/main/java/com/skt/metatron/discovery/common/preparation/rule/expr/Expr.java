@@ -384,6 +384,28 @@ public interface Expr extends Expression {
     }
   }
 
+  class BinAsExpr extends BinaryNumericOpExprBase {
+
+    public BinAsExpr(String op, Expr left, Expr right) {
+      super(op, left, right);
+    }
+
+    @Override
+    protected ExprEval evalString(String left, String right) {
+      return ExprEval.of(left.compareTo(right) < 0 ? 1L : 0L);
+    }
+
+    @Override
+    protected final long evalLong(long left, long right) {
+      return left < right ? 1L : 0L;
+    }
+
+    @Override
+    protected final double evalDouble(double left, double right) {
+      return left < right ? 1.0d : 0.0d;
+    }
+  }
+
   class BinLtExpr extends BinaryNumericOpExprBase {
 
     public BinLtExpr(String op, Expr left, Expr right) {

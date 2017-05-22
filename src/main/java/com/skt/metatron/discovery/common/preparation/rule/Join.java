@@ -9,8 +9,7 @@ public class Join implements Rule, Rule.Factory {
 
   Expression leftSelectCol;
   Expression rigthSelectCol;
-  Expression lhs;
-  Expression rhs;
+  Expression condition;
   String joinType;
 
   public Join() {
@@ -32,20 +31,12 @@ public class Join implements Rule, Rule.Factory {
     this.rigthSelectCol = rigthSelectCol;
   }
 
-  public Expression getLhs() {
-    return lhs;
+  public Expression getCondition() {
+    return condition;
   }
 
-  public void setLhs(Expression lhs) {
-    this.lhs = lhs;
-  }
-
-  public Expression getRhs() {
-    return rhs;
-  }
-
-  public void setRhs(Expression rhs) {
-    this.rhs = rhs;
+  public void setCondition(Expression condition) {
+    this.condition = condition;
   }
 
   public String getJoinType() {
@@ -70,9 +61,8 @@ public class Join implements Rule, Rule.Factory {
   public String toString() {
     return "Join{" +
         "leftSelectCol=" + leftSelectCol +
-        ", lhs=" + lhs +
+        ", condition=" + condition +
         ", rigthSelectCol=" + rigthSelectCol +
-        ", rhs=" + rhs +
         ", joinType='" + joinType + '\'' +
         '}';
   }

@@ -235,6 +235,12 @@ public class RuleVisitorParser implements Parser {
               (Expr) ctx.getChild(0).accept(this),
               (Expr) ctx.getChild(2).accept(this)
           );
+        case RuleParser.ASSIGN:
+          return new Expr.BinAsExpr(
+                  ctx.getChild(1).getText(),
+                  (Expr) ctx.getChild(0).accept(this),
+                  (Expr) ctx.getChild(2).accept(this)
+          );
         default:
           throw new RuntimeException("Unrecognized binary operator " + ctx.getChild(1).getText());
       }
