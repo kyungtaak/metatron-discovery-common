@@ -38,6 +38,7 @@ public class RuleBuilder {
     ruleNameMapper.put("nest", () -> new Nest());
     ruleNameMapper.put("unnest", () -> new Unnest());
     ruleNameMapper.put("join", () -> new Join());
+    ruleNameMapper.put("aggregate", () -> new Aggregate());
   }
 
   String ruleName;

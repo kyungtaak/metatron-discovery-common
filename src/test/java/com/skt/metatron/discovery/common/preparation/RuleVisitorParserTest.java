@@ -148,6 +148,13 @@ public class RuleVisitorParserTest {
     runAndPrint(ruleCode);
   }
 
+  @Test
+  public void aggregateTest() {
+//    String ruleCode = "pivot col: column3,column4 value: sum(column22),sum(column23) group: column11,column14 limit: 100";
+    String ruleCode = "aggregate value: count(), sum(col1) group: region,city limit: 30";
+
+    runAndPrint(ruleCode);
+  }
   private void runAndPrint(String ruleCode) {
 
     Rule rule = new RuleVisitorParser().parse(ruleCode);
