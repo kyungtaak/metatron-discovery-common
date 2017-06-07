@@ -155,6 +155,14 @@ public class RuleVisitorParserTest {
 
     runAndPrint(ruleCode);
   }
+
+  @Test
+  public void unnestTest() {
+    String ruleCode = "unnest col: name into: map idx: '1', '2'";
+
+    runAndPrint(ruleCode);
+  }
+
   private void runAndPrint(String ruleCode) {
 
     Rule rule = new RuleVisitorParser().parse(ruleCode);

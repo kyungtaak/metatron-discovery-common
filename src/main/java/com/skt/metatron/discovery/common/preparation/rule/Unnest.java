@@ -1,6 +1,6 @@
 package com.skt.metatron.discovery.common.preparation.rule;
 
-import com.skt.metatron.discovery.common.preparation.rule.expr.Constant;
+import com.skt.metatron.discovery.common.preparation.rule.expr.Expression;
 
 /**
  * Created by kyungtaak on 2017. 3. 5..
@@ -8,64 +8,48 @@ import com.skt.metatron.discovery.common.preparation.rule.expr.Constant;
 public class Unnest implements Rule, Rule.Factory {
 
   /**
-   * Unnest 할 대상 필드 (1개)
+   * Unest 할 대상 필드 (1개 이상)
    *
    */
-  String col;
+  Expression col;
 
   /**
-   * 필드 생성기준이 되는 key 명 (Nested Key, Array 인 경우 Index 정의 ex. key[key], [0])
+   * Nest 대상 타입 (map, array)
    *
    */
-  Constant keys;
+  String into;
 
   /**
-   * (Optional) 필드명에 Unnest 대상필드명을 붙이는지 여부 ex col_key
+   * Unnest 할 대상 index (1개 이상)
+   *
    */
-  Boolean markLineage;
-
-  /**
-   * (Optional) Remove Original
-   */
-  Boolean pluck;
-
+  Expression idx;
 
   public Unnest() {
   }
 
-  public Unnest(String col, Constant keys, Boolean markLineage, Boolean pluck) {
-    this.col = col;
-    this.keys = keys;
-    this.markLineage = markLineage;
-    this.pluck = pluck;
+  public Expression getCol() {
+    return col;
   }
 
-  public void setCol(String col) {
+  public void setCol(Expression col) {
     this.col = col;
   }
 
-  public Constant getKeys() {
-    return keys;
+  public String getInto() {
+    return into;
   }
 
-  public void setKeys(Constant keys) {
-    this.keys = keys;
+  public void setInto(String into) {
+    this.into = into;
   }
 
-  public Boolean getMarkLineage() {
-    return markLineage;
+  public Expression getIdx() {
+    return idx;
   }
 
-  public void setMarkLineage(Boolean markLineage) {
-    this.markLineage = markLineage;
-  }
-
-  public Boolean getPluck() {
-    return pluck;
-  }
-
-  public void setPluck(Boolean pluck) {
-    this.pluck = pluck;
+  public void setIdx(Expression idx) {
+    this.idx = idx;
   }
 
   @Override
@@ -82,9 +66,8 @@ public class Unnest implements Rule, Rule.Factory {
   public String toString() {
     return "Unnest{" +
         "col='" + col + '\'' +
-        ", keys=" + keys +
-        ", markLineage=" + markLineage +
-        ", pluck=" + pluck +
+        ", into=" + into +
+        ", idx=" + idx +
         '}';
   }
 }

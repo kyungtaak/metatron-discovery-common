@@ -54,15 +54,6 @@ public class RuleBuilder {
 
     this.arguments.forEach(arguments -> {
 
-//      Object value;
-//      if (arguments.getValue() instanceof IdentifierExpr) {
-//        value = ((IdentifierExpr) arguments.getValue()).getValue();
-//      } else if (arguments.getValue() instanceof Constant) {
-//        value = ((Constant) arguments.getValue()).getValue();
-//      } else {
-//        value = arguments.getValue();
-//      }
-
       try {
         BeanUtils.setProperty(rule, arguments.getName(), arguments.getValue());
       } catch (IllegalAccessException | InvocationTargetException e) {
