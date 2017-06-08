@@ -48,17 +48,7 @@ public interface Constant extends Expr {
 
     private final double value;
 
-    public Expr getLeft() {
-      return null;
-    }
-    public Expr getRight() {
-      return null;
-    }
-    public String getOp() {
-      return null;
-    }
-
-    public DoubleExpr(double value) {
+      public DoubleExpr(double value) {
       this.value = value;
     }
 
@@ -80,16 +70,6 @@ public interface Constant extends Expr {
   class BooleanExpr implements Constant {
 
     private final boolean value;
-
-    public Expr getLeft() {
-      return null;
-    }
-    public Expr getRight() {
-      return null;
-    }
-    public String getOp() {
-      return null;
-    }
 
     public BooleanExpr(boolean value) {
       this.value = value;
@@ -113,16 +93,6 @@ public interface Constant extends Expr {
   class ArrayExpr<T> implements Constant {
 
     private final List<T> value;
-
-    public Expr getLeft() {
-      return null;
-    }
-    public Expr getRight() {
-      return null;
-    }
-    public String getOp() {
-      return null;
-    }
 
     public ArrayExpr(List<T> value) {
       this.value = value;
@@ -148,16 +118,6 @@ public interface Constant extends Expr {
 
     private final String value;
 
-    public Expr getLeft() {
-      return null;
-    }
-    public Expr getRight() {
-      return null;
-    }
-    public String getOp() {
-      return null;
-    }
-
     public StringExpr(String value) {
       this.value = value;
     }
@@ -181,20 +141,9 @@ public interface Constant extends Expr {
     }
   }
 
-
   class StringArrayExpr implements Constant {
 
     private final List<String> value;
-
-    public Expr getLeft() {
-      return null;
-    }
-    public Expr getRight() {
-      return null;
-    }
-    public String getOp() {
-      return null;
-    }
 
     public StringArrayExpr(List<String> value) {
       this.value = value;

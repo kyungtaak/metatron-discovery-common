@@ -138,8 +138,7 @@ public interface BuiltinFunctions extends Function.Library {
     }
   }
 
-  abstract class AggreationFunc extends SingleParam {
-  }
+  abstract class AggreationFunc extends SingleParam { }
 
   class Sum extends AggreationFunc {
 
@@ -599,414 +598,353 @@ public interface BuiltinFunctions extends Function.Library {
     }
   }
 
-//  class JavaScriptFunc implements Function {
-//    ScriptableObject scope;
-//    org.mozilla.javascript.Function fnApply;
-//    com.google.common.base.Function<NumericBinding, Object[]> bindingExtractor;
-//
-//    @Override
-//    public String name() {
-//      return "javascript";
-//    }
-//
-//    @Override
-//    public ExprEval apply(List<Expr> args, NumericBinding bindings) {
-//      if (fnApply == null) {
-//        if (args.size() != 2) {
-//          throw new RuntimeException("function 'javascript' needs 2 argument");
-//        }
-//        makeFunction(Evals.getConstantString(args.get(0)), Evals.getConstantString(args.get(1)));
-//      }
-//
-//      final Object[] params = bindingExtractor.apply(bindings);
-//      // one and only one context per thread
-//      final Context cx = Context.enter();
-//      try {
-//        return ExprEval.bestEffortOf(fnApply.call(cx, scope, scope, params));
-//      } finally {
-//        Context.exit();
-//      }
-//    }
-//
-//    private void makeFunction(String required, String script) {
-//      final String[] bindings = splitAndTrim(required);
-//      final String function = "function(" + StringUtils.join(bindings, ",") + ") {" + script + "}";
-//
-//      final Context cx = Context.enter();
-//      try {
-//        cx.setOptimizationLevel(9);
-//        this.scope = cx.initStandardObjects();
-//        this.fnApply = cx.compileFunction(scope, function, "script", 1, null);
-//      } finally {
-//        Context.exit();
-//      }
-//
-//      final Object[] convey = new Object[bindings.length];
-//      bindingExtractor = new com.google.common.base.Function<NumericBinding, Object[]>() {
-//        @Override
-//        public Object[] apply(NumericBinding input) {
-//          for (int i = 0; i < bindings.length; i++) {
-//            convey[i] = input.get(bindings[i]);
-//          }
-//          return convey;
-//        }
-//      };
-//    }
-//
-//    private String[] splitAndTrim(String required) {
-//      String[] splits = required.split(",");
-//      for (int i = 0; i < splits.length; i++) {
-//        splits[i] = splits[i].trim();
-//      }
-//      return splits;
-//    }
-//  }
+  interface Str extends Function {
 
-  class ConcatFunc implements Function {
-    @Override
-    public String name() {
-      return "concat";
-    }
-
-    @Override
-    public boolean validate(List<Expr> args) {
-      return true;
-    }
-  }
-
-  class FormatFunc implements Function, Factory {
-
-    @Override
-    public String name() {
-      return "format";
-    }
-
-    @Override
-    public boolean validate(List<Expr> args) {
-      if (args.isEmpty()) {
-        LOGGER.warn("function 'format' needs at least 1 argument");
-        return false;
+    class ConcatFunc implements Function {
+      @Override
+      public String name() {
+        return "concat";
       }
 
-      return true;
+      @Override
+      public boolean validate(List<Expr> args) {
+        return true;
+      }
     }
 
-    @Override
-    public Function get() {
-      return new FormatFunc();
-    }
-  }
+    class FormatFunc implements Function, Factory {
 
-  class LPadFunc implements Function, Factory {
-
-    @Override
-    public String name() {
-      return "lpad";
-    }
-
-    private transient int length = -1;
-    private transient char padding;
-
-    @Override
-    public boolean validate(List<Expr> args) {
-      if (args.isEmpty()) {
-        LOGGER.warn("function 'lpad' needs 3 arguments");
-        return false;
+      @Override
+      public String name() {
+        return "format";
       }
 
-      length = (int) Evals.getConstantLong(args.get(1));
-      String string = Evals.getConstantString(args.get(2));
-      if (string.length() != 1) {
-        LOGGER.warn("3rd argument of function 'lpad' should be constant char");
-        return false;
+      @Override
+      public boolean validate(List<Expr> args) {
+        if (args.isEmpty()) {
+          LOGGER.warn("function 'format' needs at least 1 argument");
+          return false;
+        }
+
+        return true;
       }
 
-      return true;
+      @Override
+      public Function get() {
+        return new FormatFunc();
+      }
     }
 
-    @Override
-    public Function get() {
-      return new LPadFunc();
-    }
-  }
+    class LPadFunc implements Function, Factory {
 
-  class RPadFunc implements Function, Factory {
-    @Override
-    public String name() {
-      return "rpad";
-    }
-
-    private transient int length = -1;
-    private transient char padding;
-
-    @Override
-    public boolean validate(List<Expr> args) {
-      if (args.isEmpty()) {
-        LOGGER.warn("function 'rpad' needs 3 arguments");
-        return false;
+      @Override
+      public String name() {
+        return "lpad";
       }
 
-      length = (int) Evals.getConstantLong(args.get(1));
-      String string = Evals.getConstantString(args.get(2));
-      if (string.length() != 1) {
-        LOGGER.warn("3rd argument of function 'rpad' should be constant char");
-        return false;
+      private transient int length = -1;
+      private transient char padding;
+
+      @Override
+      public boolean validate(List<Expr> args) {
+        if (args.isEmpty()) {
+          LOGGER.warn("function 'lpad' needs 3 arguments");
+          return false;
+        }
+
+        length = (int) Evals.getConstantLong(args.get(1));
+        String string = Evals.getConstantString(args.get(2));
+        if (string.length() != 1) {
+          LOGGER.warn("3rd argument of function 'lpad' should be constant char");
+          return false;
+        }
+
+        return true;
       }
 
-      return true;
+      @Override
+      public Function get() {
+        return new LPadFunc();
+      }
     }
 
-    @Override
-    public Function get() {
-      return new RPadFunc();
-    }
-  }
-
-  class UpperFunc implements Function {
-    @Override
-    public String name() {
-      return "upper";
-    }
-
-    @Override
-    public boolean validate(List<Expr> args) {
-      if (args.size() != 1) {
-        LOGGER.warn("function 'upper' needs 1 argument");
-        return false;
+    class RPadFunc implements Function, Factory {
+      @Override
+      public String name() {
+        return "rpad";
       }
 
-      return true;
-    }
+      private transient int length = -1;
+      private transient char padding;
 
-  }
+      @Override
+      public boolean validate(List<Expr> args) {
+        if (args.isEmpty()) {
+          LOGGER.warn("function 'rpad' needs 3 arguments");
+          return false;
+        }
 
-  class LowerFunc implements Function {
-    @Override
-    public String name() {
-      return "lower";
-    }
+        length = (int) Evals.getConstantLong(args.get(1));
+        String string = Evals.getConstantString(args.get(2));
+        if (string.length() != 1) {
+          LOGGER.warn("3rd argument of function 'rpad' should be constant char");
+          return false;
+        }
 
-    @Override
-    public boolean validate(List<Expr> args) {
-      if (args.size() != 1) {
-        LOGGER.warn("function 'lower' needs 1 argument");
-        return false;
+        return true;
       }
 
-      return true;
+      @Override
+      public Function get() {
+        return new RPadFunc();
+      }
     }
 
-  }
-
-  class SplitFunc implements Function {
-    @Override
-    public String name() {
-      return "split";
-    }
-
-    @Override
-    public boolean validate(List<Expr> args) {
-      if (args.size() != 3) {
-        LOGGER.warn("function 'split' needs 3 arguments");
-        return false;
+    class UpperFunc implements Function {
+      @Override
+      public String name() {
+        return "upper";
       }
 
-      return true;
-    }
-  }
+      @Override
+      public boolean validate(List<Expr> args) {
+        if (args.size() != 1) {
+          LOGGER.warn("function 'upper' needs 1 argument");
+          return false;
+        }
 
-  class ProperFunc implements Function {
-    @Override
-    public String name() {
-      return "proper";
-    }
-
-    @Override
-    public boolean validate(List<Expr> args) {
-      if (args.size() != 1) {
-        LOGGER.warn("function 'split' needs 1 arguments");
-        return false;
+        return true;
       }
 
-      return true;
     }
 
-  }
-
-  class LengthFunc implements Function {
-    @Override
-    public String name() {
-      return "length";
-    }
-
-    @Override
-    public boolean validate(List<Expr> args) {
-      if (args.size() != 1) {
-        LOGGER.warn("function 'length' needs 1 argument");
-        return false;
+    class LowerFunc implements Function {
+      @Override
+      public String name() {
+        return "lower";
       }
 
-      return true;
-    }
-  }
+      @Override
+      public boolean validate(List<Expr> args) {
+        if (args.size() != 1) {
+          LOGGER.warn("function 'lower' needs 1 argument");
+          return false;
+        }
 
-  class SubstringFunc implements Function {
-    @Override
-    public String name() {
-      return "substring";
-    }
-
-    @Override
-    public boolean validate(List<Expr> args) {
-      if (args.size() != 3) {
-        LOGGER.warn("function 'substring' needs 3 argument");
-        return false;
+        return true;
       }
 
-      return true;
-    }
-  }
-
-  class LeftFunc implements Function {
-    @Override
-    public String name() {
-      return "left";
     }
 
-    @Override
-    public boolean validate(List<Expr> args) {
-      if (args.size() != 2) {
-        LOGGER.warn("function 'left' needs 2 arguments");
-        return false;
+    class SplitFunc implements Function {
+      @Override
+      public String name() {
+        return "split";
       }
 
-      return true;
+      @Override
+      public boolean validate(List<Expr> args) {
+        if (args.size() != 3) {
+          LOGGER.warn("function 'split' needs 3 arguments");
+          return false;
+        }
+
+        return true;
+      }
     }
 
-  }
-
-  class RightFunc implements Function {
-    @Override
-    public String name() {
-      return "right";
-    }
-
-    @Override
-    public boolean validate(List<Expr> args) {
-      if (args.size() != 2) {
-        LOGGER.warn("function 'right' needs 2 arguments");
-        return false;
+    class ProperFunc implements Function {
+      @Override
+      public String name() {
+        return "proper";
       }
 
-      return true;
-    }
-  }
+      @Override
+      public boolean validate(List<Expr> args) {
+        if (args.size() != 1) {
+          LOGGER.warn("function 'split' needs 1 arguments");
+          return false;
+        }
 
-  class MidFunc implements Function {
-    @Override
-    public String name() {
-      return "mid";
-    }
-
-    @Override
-    public boolean validate(List<Expr> args) {
-      if (args.size() != 3) {
-        LOGGER.warn("function 'mid' needs 3 arguments");
-        return false;
+        return true;
       }
 
-      return true;
     }
 
-  }
-
-  class IndexOfFunc implements Function {
-    @Override
-    public String name() {
-      return "indexOf";
-    }
-
-    @Override
-    public boolean validate(List<Expr> args) {
-      if (args.size() != 2) {
-        LOGGER.warn("function 'mid' needs 2 arguments");
-        return false;
+    class LengthFunc implements Function {
+      @Override
+      public String name() {
+        return "length";
       }
 
-      return true;
+      @Override
+      public boolean validate(List<Expr> args) {
+        if (args.size() != 1) {
+          LOGGER.warn("function 'length' needs 1 argument");
+          return false;
+        }
+
+        return true;
+      }
     }
-  }
 
-  class ReplaceFunc implements Function {
-
-    @Override
-    public String name() {
-      return "replace";
-    }
-
-    @Override
-    public boolean validate(List<Expr> args) {
-      if (args.size() != 3) {
-        LOGGER.warn("function 'replace' needs 2 arguments");
-        return false;
+    class SubstringFunc implements Function {
+      @Override
+      public String name() {
+        return "substring";
       }
 
-      return true;
+      @Override
+      public boolean validate(List<Expr> args) {
+        if (args.size() != 3) {
+          LOGGER.warn("function 'substring' needs 3 argument");
+          return false;
+        }
+
+        return true;
+      }
     }
 
-  }
-
-  class TrimFunc implements Function {
-    @Override
-    public String name() {
-      return "trim";
-    }
-
-    @Override
-    public boolean validate(List<Expr> args) {
-      if (args.size() != 3) {
-        LOGGER.warn("function 'trim' needs 1 argument");
-        return false;
+    class LeftFunc implements Function {
+      @Override
+      public String name() {
+        return "left";
       }
 
-      return true;
-    }
-  }
+      @Override
+      public boolean validate(List<Expr> args) {
+        if (args.size() != 2) {
+          LOGGER.warn("function 'left' needs 2 arguments");
+          return false;
+        }
 
-  class InFunc implements Function, Factory {
-    @Override
-    public String name() {
-      return "in";
-    }
-
-    @Override
-    public boolean validate(List<Expr> args) {
-      if (args.size() < 2) {
-        LOGGER.warn("function 'in' needs at least 2 arguments");
-        return false;
+        return true;
       }
 
-      return true;
     }
 
-    @Override
-    public Function get() {
-      return new InFunc();
+    class RightFunc implements Function {
+      @Override
+      public String name() {
+        return "right";
+      }
+
+      @Override
+      public boolean validate(List<Expr> args) {
+        if (args.size() != 2) {
+          LOGGER.warn("function 'right' needs 2 arguments");
+          return false;
+        }
+
+        return true;
+      }
+    }
+
+    class MidFunc implements Function {
+      @Override
+      public String name() {
+        return "mid";
+      }
+
+      @Override
+      public boolean validate(List<Expr> args) {
+        if (args.size() != 3) {
+          LOGGER.warn("function 'mid' needs 3 arguments");
+          return false;
+        }
+
+        return true;
+      }
+
+    }
+
+    class IndexOfFunc implements Function {
+      @Override
+      public String name() {
+        return "indexOf";
+      }
+
+      @Override
+      public boolean validate(List<Expr> args) {
+        if (args.size() != 2) {
+          LOGGER.warn("function 'mid' needs 2 arguments");
+          return false;
+        }
+
+        return true;
+      }
+    }
+
+    class ReplaceFunc implements Function {
+
+      @Override
+      public String name() {
+        return "replace";
+      }
+
+      @Override
+      public boolean validate(List<Expr> args) {
+        if (args.size() != 3) {
+          LOGGER.warn("function 'replace' needs 2 arguments");
+          return false;
+        }
+
+        return true;
+      }
+
+    }
+
+    class TrimFunc implements Function {
+      @Override
+      public String name() {
+        return "trim";
+      }
+
+      @Override
+      public boolean validate(List<Expr> args) {
+        if (args.size() != 3) {
+          LOGGER.warn("function 'trim' needs 1 argument");
+          return false;
+        }
+
+        return true;
+      }
+    }
+
+    class InFunc implements Function, Factory {
+      @Override
+      public String name() {
+        return "in";
+      }
+
+      @Override
+      public boolean validate(List<Expr> args) {
+        if (args.size() < 2) {
+          LOGGER.warn("function 'in' needs at least 2 arguments");
+          return false;
+        }
+
+        return true;
+      }
+
+      @Override
+      public Function get() {
+        return new InFunc();
+      }
+    }
+
+    class Now implements Function {
+
+      @Override
+      public String name() {
+        return "now";
+      }
+
+      @Override
+      public boolean validate(List<Expr> args) {
+        return true;
+      }
+
     }
   }
-
-  class Now implements Function {
-
-    @Override
-    public String name() {
-      return "now";
-    }
-
-    @Override
-    public boolean validate(List<Expr> args) {
-      return true;
-    }
-
-  }
-
 }

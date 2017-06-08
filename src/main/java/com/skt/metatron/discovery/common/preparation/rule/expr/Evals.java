@@ -15,8 +15,7 @@ public class Evals {
 
   static final DateTimeFormatter defaultFormat = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
 
-  static boolean eq(ExprEval leftVal, ExprEval rightVal)
-  {
+  static boolean eq(ExprEval leftVal, ExprEval rightVal) {
     if (isSameType(leftVal, rightVal)) {
       return Objects.equals(leftVal.value(), rightVal.value());
     }
@@ -36,25 +35,21 @@ public class Evals {
     return left.isNumeric() && right.isNumeric();
   }
 
-  static boolean isAllString(ExprEval left, ExprEval right)
-  {
+  static boolean isAllString(ExprEval left, ExprEval right) {
     return left.type() == ExprType.STRING && right.type() == ExprType.STRING;
   }
 
-  static void assertNumeric(ExprType type)
-  {
+  static void assertNumeric(ExprType type) {
     if (type != ExprType.LONG && type != ExprType.DOUBLE) {
       throw new IllegalArgumentException("unsupported type " + type);
     }
   }
 
-  static String evalOptionalString(Expr arg, Expr.NumericBinding binding)
-  {
+  static String evalOptionalString(Expr arg, Expr.NumericBinding binding) {
     return arg == null ? null : arg.eval(binding).asString();
   }
 
-  static String getConstantString(Expr arg)
-  {
+  static String getConstantString(Expr arg) {
     if (!(arg instanceof Constant.StringExpr)) {
       throw new RuntimeException(arg + " is not constant string");
     }
@@ -141,68 +136,7 @@ public class Evals {
     throw new IllegalArgumentException("not supported type " + castTo);
   }
 
-//  public static Object castTo(ExprEval eval, ValueType castTo)
-//  {
-//    switch (castTo) {
-//      case FLOAT:
-//        return eval.asFloat();
-//      case DOUBLE:
-//        return eval.asDouble();
-//      case LONG:
-//        return eval.asLong();
-//      case STRING:
-//        return eval.asString();
-//      default:
-//        throw new IllegalArgumentException("not supported type " + castTo);
-//    }
-//  }
-//
-//  public static com.google.common.base.Function<Comparable, Number> asNumberFunc(ValueType type)
-//  {
-//    switch (type) {
-//      case FLOAT:
-//        return new com.google.common.base.Function<Comparable, Number>()
-//        {
-//          @Override
-//          public Number apply(Comparable input)
-//          {
-//            return input == null ? 0F : (Float) input;
-//          }
-//        };
-//      case DOUBLE:
-//        return new com.google.common.base.Function<Comparable, Number>()
-//        {
-//          @Override
-//          public Number apply(Comparable input)
-//          {
-//            return input == null ? 0D : (Double) input;
-//          }
-//        };
-//      case LONG:
-//        return new com.google.common.base.Function<Comparable, Number>()
-//        {
-//          @Override
-//          public Number apply(Comparable input)
-//          {
-//            return input == null ? 0L : (Long) input;
-//          }
-//        };
-//      case STRING:
-//        return new com.google.common.base.Function<Comparable, Number>()
-//        {
-//          @Override
-//          public Number apply(Comparable input)
-//          {
-//            String string = (String) input;
-//            return Strings.isNullOrEmpty(string)
-//                ? 0L
-//                : StringUtils.isNumeric(string) ? Long.valueOf(string) : Double.valueOf(string);
-//          }
-//        };
-//    }
-//    throw new UnsupportedOperationException("Unsupported type " + type);
-//  }
-//
+
   static DateTime toDateTime(ExprEval arg)
   {
     switch (arg.type()) {

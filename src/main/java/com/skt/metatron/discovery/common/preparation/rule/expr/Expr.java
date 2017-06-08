@@ -21,16 +21,6 @@ public interface Expr extends Expression {
   }
 
   class FunctionArrayExpr implements Expr {
-    public Expr getLeft() {
-      return null;
-    }
-    public Expr getRight() {
-      return null;
-    }
-    public String getOp() {
-      return null;
-    }
-
     final List<FunctionExpr> functions;
 
     public FunctionArrayExpr(List<FunctionExpr> functions) {
@@ -57,16 +47,6 @@ public interface Expr extends Expression {
   class AssignExpr implements Expr {
     final Expr assignee;
     final Expr assigned;
-
-    public Expr getLeft() {
-      return null;
-    }
-    public Expr getRight() {
-      return null;
-    }
-    public String getOp() {
-      return null;
-    }
 
     public AssignExpr(Expr assignee, Expr assigned) {
       this.assignee = assignee;
@@ -139,16 +119,6 @@ public interface Expr extends Expression {
   class UnaryMinusExpr implements Expr {
     final Expr expr;
 
-    public Expr getLeft() {
-      return null;
-    }
-    public Expr getRight() {
-      return null;
-    }
-    public String getOp() {
-      return null;
-    }
-
     public UnaryMinusExpr(Expr expr) {
       this.expr = expr;
     }
@@ -173,16 +143,6 @@ public interface Expr extends Expression {
 
   class UnaryNotExpr implements Expr, Expression.NotExpression {
     final Expr expr;
-
-    public Expr getLeft() {
-      return null;
-    }
-    public Expr getRight() {
-      return null;
-    }
-    public String getOp() {
-      return null;
-    }
 
     public UnaryNotExpr(Expr expr) {
       this.expr = expr;
@@ -538,7 +498,7 @@ public interface Expr extends Expression {
     }
   }
 
-  class BinAndExpr extends BinaryOpExprBase implements Expression.AndExpression {
+  class BinAndExpr extends BinaryNumericOpExprBase implements Expression.AndExpression {
     public BinAndExpr(String op, Expr left, Expr right) {
       super(op, left, right);
     }
@@ -553,9 +513,18 @@ public interface Expr extends Expression {
     public List<Expr> getChildren() {
       return Arrays.asList(left, right);
     }
+
+    protected long evalLong(long left, long right) {
+      return left > 0 & right > 0 ? 1L : 0L;
+    }
+
+    @Override
+    protected double evalDouble(double left, double right) {
+      return left > 0 & right > 0 ? 1.0d : 0.0d;
+    }
   }
 
-  class BinOrExpr extends BinaryOpExprBase implements Expression.OrExpression {
+  class BinOrExpr extends BinaryNumericOpExprBase implements Expression.OrExpression {
     public BinOrExpr(String op, Expr left, Expr right) {
       super(op, left, right);
     }
@@ -569,6 +538,15 @@ public interface Expr extends Expression {
     @Override
     public List<Expr> getChildren() {
       return Arrays.asList(left, right);
+    }
+
+    protected long evalLong(long left, long right) {
+      return left > 0 | right > 0 ? 1L : 0L;
+    }
+
+    @Override
+    protected double evalDouble(double left, double right) {
+      return left > 0 | right > 0 ? 1.0d : 0.0d;
     }
   }
 

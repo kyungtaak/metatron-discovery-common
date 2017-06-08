@@ -46,16 +46,6 @@ public interface Identifier extends Constant {
 
     private final List<String> value;
 
-    public Expr getLeft() {
-      return null;
-    }
-    public Expr getRight() {
-      return null;
-    }
-    public String getOp() {
-      return null;
-    }
-
     public IdentifierArrayExpr(List<String> value) {
       this.value = value;
     }

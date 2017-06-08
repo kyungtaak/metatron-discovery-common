@@ -7,10 +7,6 @@ import java.util.List;
  */
 public interface Expression {
 
-  Expr getLeft();
-  Expr getRight();
-  String getOp();
-
   interface BooleanExpression extends Expression {
     <T extends Expression> List<T> getChildren();
   }
