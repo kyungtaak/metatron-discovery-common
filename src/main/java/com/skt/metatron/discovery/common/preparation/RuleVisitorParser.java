@@ -123,7 +123,7 @@ public class RuleVisitorParser implements Parser {
     }
 
     @Override
-    public Expression visitRegularExprExpr(RuleParser.RegularExprExprContext ctx) {
+    public Expression visitRegularExpr(RuleParser.RegularExprContext ctx) {
       return new RegularExpr(ctx.getText());
     }
 

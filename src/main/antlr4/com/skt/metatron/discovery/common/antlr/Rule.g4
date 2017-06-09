@@ -21,7 +21,7 @@ expr : ('-'|'!') expr                                 # unaryOpExpr
      | DOUBLE                                         # doubleExpr
      | LONG                                           # longExpr
      | STRING                                         # stringExpr
-     | REGEX                                          # regularExprExpr
+     | REGEX                                          # regularExpr
      | IDENTIFIER (',' IDENTIFIER)+                   # identifierArrayExpr
      | STRING (',' STRING)+                           # stringArrayExpr
      | LONG (',' LONG)+                               # longArrayExpr
@@ -62,3 +62,4 @@ NEQ : '!=' ;
 AND : '&&' ;
 OR : '||' ;
 ASSIGN : '=' ;
+RANGE : '~' ;

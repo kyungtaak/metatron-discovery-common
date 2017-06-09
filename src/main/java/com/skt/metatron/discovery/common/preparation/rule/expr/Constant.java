@@ -15,16 +15,6 @@ public interface Constant extends Expr {
   class LongExpr implements Constant {
     private final long value;
 
-    public Expr getLeft() {
-      return null;
-    }
-    public Expr getRight() {
-      return null;
-    }
-    public String getOp() {
-      return null;
-    }
-
     public LongExpr(long value) {
       this.value = value;
     }

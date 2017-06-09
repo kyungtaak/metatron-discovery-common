@@ -7,20 +7,9 @@ import java.util.List;
  * Created by kyungtaak on 2017. 3. 8..
  */
 public interface Identifier extends Constant {
-
   class IdentifierExpr implements Identifier {
 
     private final String value;
-
-    public Expr getLeft() {
-      return null;
-    }
-    public Expr getRight() {
-      return null;
-    }
-    public String getOp() {
-      return null;
-    }
 
     public IdentifierExpr(String value) {
       this.value = value;

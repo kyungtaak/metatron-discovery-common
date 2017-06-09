@@ -56,16 +56,14 @@ public class Evals {
     return arg.eval(null).stringValue();
   }
 
-  static String getIdentifier(Expr arg)
-  {
+  static String getIdentifier(Expr arg) {
     if (!(arg instanceof Identifier.IdentifierExpr)) {
       throw new RuntimeException(arg + " is not identifier");
     }
     return arg.toString();
   }
 
-  static long getConstantLong(Expr arg)
-  {
+  static long getConstantLong(Expr arg) {
     Object constant = getConstant(arg);
     if (!(constant instanceof Long)) {
       throw new RuntimeException(arg + " is not a constant long");
@@ -73,8 +71,7 @@ public class Evals {
     return (Long) constant;
   }
 
-  static Number getConstantNumber(Expr arg)
-  {
+  static Number getConstantNumber(Expr arg) {
     Object constant = getConstant(arg);
     if (!(constant instanceof Number)) {
       throw new RuntimeException(arg + " is not a constant number");
@@ -82,8 +79,7 @@ public class Evals {
     return (Number) constant;
   }
 
-  static Object getConstant(Expr arg)
-  {
+  static Object getConstant(Expr arg) {
     if (arg instanceof Constant.StringExpr) {
       return arg.eval(null).stringValue();
     } else if (arg instanceof Constant.LongExpr) {
@@ -101,8 +97,7 @@ public class Evals {
     throw new RuntimeException(arg + " is not a constant");
   }
 
-  static boolean isConstant(Expr arg)
-  {
+  static boolean isConstant(Expr arg) {
     if (arg instanceof Constant) {
       return true;
     } else if (arg instanceof Expr.UnaryMinusExpr) {
@@ -111,8 +106,7 @@ public class Evals {
     return false;
   }
 
-  static Object[] getConstants(List<Expr> args)
-  {
+  static Object[] getConstants(List<Expr> args) {
     Object[] constants = new Object[args.size()];
     for (int i = 0; i < constants.length; i++) {
       constants[i] = getConstant(args.get(i));
@@ -120,8 +114,7 @@ public class Evals {
     return constants;
   }
 
-  static ExprEval castTo(ExprEval eval, ExprType castTo)
-  {
+  static ExprEval castTo(ExprEval eval, ExprType castTo) {
     if (eval.type() == castTo) {
       return eval;
     }
@@ -136,9 +129,7 @@ public class Evals {
     throw new IllegalArgumentException("not supported type " + castTo);
   }
 
-
-  static DateTime toDateTime(ExprEval arg)
-  {
+  static DateTime toDateTime(ExprEval arg) {
     switch (arg.type()) {
       case STRING:
         String string = arg.stringValue();
