@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
 public class RuleVisitorParserTest {
   @Test
   public void dropTest() {
-    String ruleCode = "drop col: test1~test2, test5";
+    String ruleCode = "drop col: test1 ~ test2, test5";
 
     runAndPrint(ruleCode);
   }
