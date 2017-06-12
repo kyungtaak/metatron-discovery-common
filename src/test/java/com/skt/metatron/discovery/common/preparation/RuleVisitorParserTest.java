@@ -129,7 +129,7 @@ public class RuleVisitorParserTest {
 
   @Test
   public void mergeTest() {
-    String ruleCode = "merge col: column5,column6 with: ',' as: 'test'";
+    String ruleCode = "merge col: column5,column6~column8 with: ',' as: 'test'";
 
     runAndPrint(ruleCode);
   }

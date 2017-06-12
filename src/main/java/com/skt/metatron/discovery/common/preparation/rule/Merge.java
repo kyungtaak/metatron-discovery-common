@@ -1,6 +1,7 @@
 package com.skt.metatron.discovery.common.preparation.rule;
 
 import com.skt.metatron.discovery.common.preparation.rule.expr.Constant;
+import com.skt.metatron.discovery.common.preparation.rule.expr.Expr;
 import com.skt.metatron.discovery.common.preparation.rule.expr.Expression;
 import com.skt.metatron.discovery.common.preparation.rule.expr.Identifier;
 
@@ -13,7 +14,7 @@ public class Merge implements Rule, Rule.Factory {
    * Merge 할 대상 필드 (1개 이상)
    *
    */
-  Identifier.IdentifierArrayExpr col;
+  Expression col;
 
   /**
    * 대치하려는 값 (String)
@@ -30,17 +31,17 @@ public class Merge implements Rule, Rule.Factory {
   public Merge() {
   }
 
-  public Merge(Identifier.IdentifierArrayExpr col, String with, String as) {
+  public Merge(Expression col, String with, String as) {
     this.col = col;
     this.with = with;
     this.as = as;
   }
 
-  public Identifier.IdentifierArrayExpr getCol() {
+  public Expression getCol() {
     return col;
   }
 
-  public void setCol(Identifier.IdentifierArrayExpr col) {
+  public void setCol(Expression col) {
     this.col = col;
   }
 
