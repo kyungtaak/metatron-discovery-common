@@ -51,8 +51,8 @@ public class Aggregate implements Rule, Rule.Factory {
 
   @Override
   public String toString() {
-    return "Pivot{" +
-        ", value=" + value +
+    return "Aggregate{" +
+        "value=" + value +
         ", group=" + group +
         '}';
   }

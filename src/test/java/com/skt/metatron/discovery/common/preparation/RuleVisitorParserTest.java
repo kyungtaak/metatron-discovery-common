@@ -135,13 +135,13 @@ public class RuleVisitorParserTest {
   @Test
   public void aggregateTest1() {
     String ruleCode = "aggregate value: count(), sum(col1) group: region,city limit: 30";
-    assertEquals("Pivot{, value=FunctionArrayExpr{functions=[count(), sum(col1)]}, group=[region, city]}", runAndPrint(ruleCode));
+    assertEquals("Aggregate{value=FunctionArrayExpr{functions=[count(), sum(col1)]}, group=[region, city]}", runAndPrint(ruleCode));
   }
 
   @Test
   public void aggregateTest2() {
-    String ruleCode = "pivot col: column3,column4 value: sum(column22),sum(column23) group: column11,column14 limit: 100";
-    assertEquals("Pivot{col=[column3, column4], value=FunctionArrayExpr{functions=[sum(column22), sum(column23)]}, group=[column11, column14], limit=100}", runAndPrint(ruleCode));
+    String ruleCode = "aggregate col: column3,column4 value: sum(column22),sum(column23) group: column11,column14 limit: 100";
+    assertEquals("Aggregate{value=FunctionArrayExpr{functions=[sum(column22), sum(column23)]}, group=[column11, column14]}", runAndPrint(ruleCode));
   }
 
   @Test
