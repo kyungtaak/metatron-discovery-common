@@ -13,7 +13,7 @@ public class RegularExpr implements Expr {
   private final String value;
 
   public RegularExpr(String value) {
-    this.value = value;
+    this.value = value.substring(1, value.length()).trim();
   }
 
   public String getValue() {
@@ -21,7 +21,7 @@ public class RegularExpr implements Expr {
   }
 
   public String getEscapedValue() {
-    return StringUtils.substring(value, 2, value.length() - 1);
+    return StringUtils.substring(value, 1, value.length() - 1);
   }
 
   @Override

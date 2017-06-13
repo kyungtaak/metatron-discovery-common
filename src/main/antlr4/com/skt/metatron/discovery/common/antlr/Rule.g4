@@ -7,7 +7,7 @@ args : ARG_NAME ':' expr
      ;
 
 expr : ('-'|'!') expr                                 # unaryOpExpr
-     |<assoc=right> expr '^' expr                     # powOpExpr
+     | <assoc=right> expr '^' expr                    # powOpExpr
      | expr ('*'|'/'|'%') expr                        # mulDivModuloExpr
      | expr ('+'|'-') expr                            # addSubExpr
      | expr ('<'|'<='|'>'|'>='|'=='|'!=' | '=') expr  # logicalOpExpr
@@ -41,7 +41,7 @@ DOUBLE : [0-9]+ '.' [0-9]* ;
 TRUE : 'true';
 FALSE : 'false';
 STRING : '\'' (ESC | ~ [\'\\])* '\'';
-REGEX : '//' (ESC | ~ [\'/])* '/';
+REGEX : ':' [ ]* '/' (ESC | ~ [\'/])* '/';
 fragment ESC : '\\' ([\'\\/bfnrt] | UNICODE) ;
 fragment UNICODE : 'u' HEX HEX HEX HEX ;
 fragment HEX : [0-9a-fA-F] ;

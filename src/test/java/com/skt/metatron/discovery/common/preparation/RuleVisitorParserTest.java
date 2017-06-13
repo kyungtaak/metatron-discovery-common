@@ -15,155 +15,148 @@ public class RuleVisitorParserTest {
   @Test
   public void dropTest() {
     String ruleCode = "drop col: test1 ~ test2, test5";
-
-    runAndPrint(ruleCode);
+    assertEquals("Drop{col=test1~test2,test5}", runAndPrint(ruleCode));
   }
 
   @Test
   public void headerTest() {
     String ruleCode = "header rownum: 1";
-
-    runAndPrint(ruleCode);
+    assertEquals("Header{rownum=1}", runAndPrint(ruleCode));
   }
 
   @Test
   public void renameTest() {
     String ruleCode = "rename col: test to: 'abc'";
-
-    runAndPrint(ruleCode);
+    assertEquals("Rename{col='test', to=''abc''}", runAndPrint(ruleCode));
   }
 
   @Test
   public void keepTest1() {
     String ruleCode = "keep row: isnull(Category)";
-
-    runAndPrint(ruleCode);
+    assertEquals("Keep{row=isnull(Category)}", runAndPrint(ruleCode));
   }
 
   @Test
   public void keepTest2() {
     String ruleCode = "keep row: (column4-1) > 4";
-
-    runAndPrint(ruleCode);
+    assertEquals("Keep{row=((column4 - 1) > 4)}", runAndPrint(ruleCode));
   }
 
   @Test
   public void setTest2() {
-    //String ruleCode = "set col: contract_date value: math.floor(datediff (to_date(contract_date), to_date(birth_date))/365.25/10)";
     String ruleCode = "set col: name value: if(item, 1, 2) row: name == 'a'";
-    runAndPrint(ruleCode);
+    assertEquals("Set{col='name', value=if(item,1,2), row=(name == 'a')}", runAndPrint(ruleCode));
   }
 
   @Test
   public void setTypeTest() {
     String ruleCode = "settype col: Category type: 'Integer'";
-
-    runAndPrint(ruleCode);
+    assertEquals("SetType{col='Category', type=''Integer''}", runAndPrint(ruleCode));
   }
 
   @Test
   public void deriveTest() {
-//    String ruleCode = "derive value: if(column3 == 'Furniture', true, false) as: 'cate_if'";
-//    String ruleCode = "derive value: if(category == 'Furniture', true, false) as: 'cate_if'";
     String ruleCode = "derive value: substring(name, 1, 2)/10/3 as: 'cate_if'";
-
-    runAndPrint(ruleCode);
+    assertEquals("Derive{value=((substring(name,1,2) / 10) / 3), as=''cate_if''}", runAndPrint(ruleCode));
   }
 
   @Test
   public void replaceTest() {
-    String ruleCode = "replace col: Category with: 'abc' on: //\\d{3}/ global: true row: sales > 10";
-
-    runAndPrint(ruleCode);
+    String ruleCode = "replace col: Category with: 'abc' on: /\\d{3}/ global: true row: sales > 10";
+    assertEquals("Replace{col=Category, on=/\\\\d{3}/, after=null, before=null, with='abc', global=true, row=(sales > 10)}", runAndPrint(ruleCode));
   }
 
   @Test
   public void countPatternTest() {
     String ruleCode = "countpattern col: City on: /H.*/ ignoreCase: true";
-
-    runAndPrint(ruleCode);
+    assertEquals("CountPattern{col='City', on=/H.*/, after=null, before=null, ignoreCase=true}", runAndPrint(ruleCode));
   }
 
   @Test
   public void splitTest() {
     String ruleCode = "split col: column7 on: '-' limit: 2 quote: '\"' ignoreCase: true";
-
-    runAndPrint(ruleCode);
+    assertEquals("Split{col='column7', on='-', limit=2, quote=''\"'', ignoreCase=true}", runAndPrint(ruleCode));
   }
 
   @Test
   public void deleteTest() {
     String ruleCode = "delete row: Sales < 10000";
-
-    runAndPrint(ruleCode);
+    assertEquals("Delete{row=(Sales < 10000)}", runAndPrint(ruleCode));
   }
 
   @Test
-  public void pivotTest() {
-//    String ruleCode = "pivot col: column3,column4 value: sum(column22),sum(column23) group: column11,column14 limit: 100";
+  public void pivotTest1() {
     String ruleCode = "pivot col: birth_year value: count() group: region limit: 30";
+    assertEquals("Pivot{col=birth_year, value=count(), group=region, limit=30}", runAndPrint(ruleCode));
+  }
 
-    runAndPrint(ruleCode);
+  @Test
+  public void pivotTest2() {
+    String ruleCode = "pivot col: column3,column4 value: sum(column22),sum(column23) group: column11,column14 limit: 100";
+    assertEquals("Pivot{col=[column3, column4], value=FunctionArrayExpr{functions=[sum(column22), sum(column23)]}, group=[column11, column14], limit=100}", runAndPrint(ruleCode));
   }
 
   @Test
   public void unpivotTest() {
     String ruleCode = "unpivot col: column3,column6 groupEvery:2";
-
-    runAndPrint(ruleCode);
+    assertEquals("Unpivot{col=[column3, column6], groupEvery=2}", runAndPrint(ruleCode));
   }
 
   @Test
   public void extractTest() {
-    String ruleCode = "extract col: column5 on: //e/ limit: 2 quote: '\''";
-
-    runAndPrint(ruleCode);
+    String ruleCode = "extract col: column5 on: /e/ limit: 2 quote: '\''";
+    assertEquals("Extract{col='column5', on=/e/, limit=2, quote='''', ignoreCase=null}", runAndPrint(ruleCode));
   }
 
   @Test
   public void flattenTest() {
     String ruleCode = "flatten col: column5";
-
-    runAndPrint(ruleCode);
+    assertEquals("Flatten{col='column5'}", runAndPrint(ruleCode));
   }
 
   @Test
   public void mergeTest() {
     String ruleCode = "merge col: column5,column6~column8 with: ',' as: 'test'";
-
-    runAndPrint(ruleCode);
+    assertEquals("Merge{col=column5,column6~column8, with=',', as=''test''}", runAndPrint(ruleCode));
   }
 
   @Test
   public void nestTest() {
     String ruleCode = "nest col: ItemA,ItemB into:'map' as:'myMap'";
-
-    runAndPrint(ruleCode);
+    assertEquals("Nest{col=[ItemA, ItemB], into=''map'', as=''myMap''}", runAndPrint(ruleCode));
   }
 
   @Test
   public void joinTest() {
     String ruleCode = "join leftSelectCol: ItemA,ItemB,ItemC rigthSelectCol: ItemD,ItemE condition: ItemF=ItemG && ItemH=ItemI joinType: 'inner'";
-
-    runAndPrint(ruleCode);
+    assertEquals("Join{leftSelectCol=[ItemA, ItemB, ItemC], condition=((ItemF = ItemG) && (ItemH = ItemI)), rigthSelectCol=[ItemD, ItemE], joinType=''inner''}", runAndPrint(ruleCode));
   }
 
   @Test
-  public void aggregateTest() {
-//    String ruleCode = "pivot col: column3,column4 value: sum(column22),sum(column23) group: column11,column14 limit: 100";
+  public void aggregateTest1() {
     String ruleCode = "aggregate value: count(), sum(col1) group: region,city limit: 30";
-
-    runAndPrint(ruleCode);
+    assertEquals("Pivot{, value=FunctionArrayExpr{functions=[count(), sum(col1)]}, group=[region, city]}", runAndPrint(ruleCode));
   }
 
   @Test
-  public void unnestTest() {
-    String ruleCode = "unnest col: name into: map idx: '1', '2'";
-
-    runAndPrint(ruleCode);
+  public void aggregateTest2() {
+    String ruleCode = "pivot col: column3,column4 value: sum(column22),sum(column23) group: column11,column14 limit: 100";
+    assertEquals("Pivot{col=[column3, column4], value=FunctionArrayExpr{functions=[sum(column22), sum(column23)]}, group=[column11, column14], limit=100}", runAndPrint(ruleCode));
   }
 
-  private void runAndPrint(String ruleCode) {
+  @Test
+  public void unnestTest1() {
+    String ruleCode = "unnest col: name into: map idx: '1', '2'";
+    assertEquals("Unnest{col='name', into=map, idx=['1', '2']}", runAndPrint(ruleCode));
+  }
+
+  @Test
+  public void unnestTest2() {
+    String ruleCode = "unnest col: name ~ speed, weight into: map idx: '1', '2'";
+    assertEquals("Unnest{col='name~speed,weight', into=map, idx=['1', '2']}", runAndPrint(ruleCode));
+  }
+
+  private String runAndPrint(String ruleCode) {
 
     Rule rule = new RuleVisitorParser().parse(ruleCode);
 
@@ -175,6 +168,7 @@ public class RuleVisitorParserTest {
       e.printStackTrace();
     }
     System.out.printf("code below: %n '%s' %n has been parsed to object: %n '%s'%n '%s'%n", ruleCode, json, rule.toString());
+    return rule.toString();
   }
 
 }
