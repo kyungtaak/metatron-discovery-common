@@ -14,8 +14,8 @@ import static org.junit.Assert.*;
 public class RuleVisitorParserTest {
   @Test
   public void dropTest() {
-    String ruleCode = "drop col: test1 ~ test2, test5";
-    assertEquals("Drop{col=test1~test2,test5}", runAndPrint(ruleCode));
+    String ruleCode = "drop col: test1~test2, test5";
+    assertEquals("Drop{col=[test1~test2, test5]}", runAndPrint(ruleCode));
   }
 
   @Test
@@ -117,7 +117,7 @@ public class RuleVisitorParserTest {
   @Test
   public void mergeTest() {
     String ruleCode = "merge col: column5,column6~column8 with: ',' as: 'test'";
-    assertEquals("Merge{col=column5,column6~column8, with=',', as=''test''}", runAndPrint(ruleCode));
+    assertEquals("Merge{col=[column5, column6~column8], with=',', as=''test''}", runAndPrint(ruleCode));
   }
 
   @Test
@@ -152,8 +152,8 @@ public class RuleVisitorParserTest {
 
   @Test
   public void unnestTest2() {
-    String ruleCode = "unnest col: name ~ speed, weight into: map idx: '1', '2'";
-    assertEquals("Unnest{col='name~speed,weight', into=map, idx=['1', '2']}", runAndPrint(ruleCode));
+    String ruleCode = "unnest col: name~speed, weight into: map idx: '1', '2'";
+    assertEquals("Unnest{col='[name~speed, weight]', into=map, idx=['1', '2']}", runAndPrint(ruleCode));
   }
 
   private String runAndPrint(String ruleCode) {
