@@ -97,9 +97,15 @@ public class RuleVisitorParserTest {
   }
 
   @Test
-  public void unpivotTest() {
+  public void unpivotTest1() {
     String ruleCode = "unpivot col: column3,column6 groupEvery:2";
     assertEquals("Unpivot{col=[column3, column6], groupEvery=2}", runAndPrint(ruleCode));
+  }
+
+  @Test
+  public void unpivotTest2() {
+    String ruleCode = "unpivot col: column3 groupEvery:1";
+    assertEquals("Unpivot{col=column3, groupEvery=1}", runAndPrint(ruleCode));
   }
 
   @Test

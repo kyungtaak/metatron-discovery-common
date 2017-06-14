@@ -1,5 +1,6 @@
 package com.skt.metatron.discovery.common.preparation.rule;
 
+import com.skt.metatron.discovery.common.preparation.rule.expr.Expression;
 import com.skt.metatron.discovery.common.preparation.rule.expr.Identifier;
 
 /**
@@ -11,7 +12,7 @@ public class Unpivot implements Rule, Rule.Factory {
    * 복수개의 Unpivot 대상 컬럼 (Required)
    *
    */
-  Identifier.IdentifierArrayExpr col;
+  Expression col;
 
   /**
    * unpivot 시 개별 칼럼 구성 숫자 (col 개수보다 작거나 같아야함)
@@ -21,16 +22,16 @@ public class Unpivot implements Rule, Rule.Factory {
   public Unpivot() {
   }
 
-  public Unpivot(Identifier.IdentifierArrayExpr col, Integer groupEvery) {
+  public Unpivot(Expression col, Integer groupEvery) {
     this.col = col;
     this.groupEvery = groupEvery;
   }
 
-  public Identifier.IdentifierArrayExpr getCol() {
+  public Expression getCol() {
     return col;
   }
 
-  public void setCol(Identifier.IdentifierArrayExpr col) {
+  public void setCol(Expression col) {
     this.col = col;
   }
 
