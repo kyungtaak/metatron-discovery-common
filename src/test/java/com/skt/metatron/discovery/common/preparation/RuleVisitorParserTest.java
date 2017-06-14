@@ -145,16 +145,16 @@ public class RuleVisitorParserTest {
   }
 
   @Test
-  public void unnestTest1() {
+  public void unnestTest() {
     String ruleCode = "unnest col: name into: map idx: '1', '2'";
     assertEquals("Unnest{col='name', into=map, idx=['1', '2']}", runAndPrint(ruleCode));
   }
 
-  @Test
-  public void unnestTest2() {
-    String ruleCode = "unnest col: name~speed, weight into: map idx: '1', '2'";
-    assertEquals("Unnest{col='[name~speed, weight]', into=map, idx=['1', '2']}", runAndPrint(ruleCode));
-  }
+  //@Test
+  //public void unnestTest2() {
+  //  String ruleCode = "unnest col: name~speed, weight into: map idx: '1', '2'";
+  //  assertEquals("Unnest{col='[name~speed, weight]', into=map, idx=['1', '2']}", runAndPrint(ruleCode));
+  //}
 
   private String runAndPrint(String ruleCode) {
 

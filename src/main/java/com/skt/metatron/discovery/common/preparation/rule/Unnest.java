@@ -11,7 +11,7 @@ public class Unnest implements Rule, Rule.Factory {
    * Unest 할 대상 필드 (1개 이상)
    *
    */
-  Expression col;
+  String col;
 
   /**
    * Nest 대상 타입 (map, array)
@@ -28,11 +28,11 @@ public class Unnest implements Rule, Rule.Factory {
   public Unnest() {
   }
 
-  public Expression getCol() {
+  public String getCol() {
     return col;
   }
 
-  public void setCol(Expression col) {
+  public void setCol(String col) {
     this.col = col;
   }
 
