@@ -7,12 +7,21 @@ import com.skt.metatron.discovery.common.preparation.rule.expr.Expression;
  */
 public class Join implements Rule, Rule.Factory {
 
+  Expression dataset2;
   Expression leftSelectCol;
   Expression rigthSelectCol;
   Expression condition;
   String joinType;
 
   public Join() {
+  }
+
+  public Expression getDataset2() {
+    return dataset2;
+  }
+
+  public void setDataset2(Expression dataset2) {
+    this.dataset2 = dataset2;
   }
 
   public Expression getLeftSelectCol() {
@@ -60,7 +69,8 @@ public class Join implements Rule, Rule.Factory {
   @Override
   public String toString() {
     return "Join{" +
-        "leftSelectCol=" + leftSelectCol +
+        "dataset2=" + dataset2 +
+        ", leftSelectCol=" + leftSelectCol +
         ", condition=" + condition +
         ", rigthSelectCol=" + rigthSelectCol +
         ", joinType='" + joinType + '\'' +

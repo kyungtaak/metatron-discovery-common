@@ -134,8 +134,8 @@ public class RuleVisitorParserTest {
 
   @Test
   public void joinTest() {
-    String ruleCode = "join leftSelectCol: ItemA,ItemB,ItemC rigthSelectCol: ItemD,ItemE condition: ItemF=ItemG && ItemH=ItemI joinType: 'inner'";
-    assertEquals("Join{leftSelectCol=[ItemA, ItemB, ItemC], condition=((ItemF = ItemG) && (ItemH = ItemI)), rigthSelectCol=[ItemD, ItemE], joinType=''inner''}", runAndPrint(ruleCode));
+    String ruleCode = "join dataset2: name2 leftSelectCol: ItemA,ItemB,ItemC rigthSelectCol: ItemD,ItemE condition: ItemF=ItemG && ItemH=ItemI joinType: 'inner'";
+    assertEquals("Join{dataset2=name2, leftSelectCol=[ItemA, ItemB, ItemC], condition=((ItemF = ItemG) && (ItemH = ItemI)), rigthSelectCol=[ItemD, ItemE], joinType=''inner''}", runAndPrint(ruleCode));
   }
 
   @Test
