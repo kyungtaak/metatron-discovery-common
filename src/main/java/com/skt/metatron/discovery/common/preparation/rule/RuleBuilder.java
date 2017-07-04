@@ -39,6 +39,7 @@ public class RuleBuilder {
     ruleNameMapper.put("unnest", () -> new Unnest());
     ruleNameMapper.put("join", () -> new Join());
     ruleNameMapper.put("aggregate", () -> new Aggregate());
+    ruleNameMapper.put("splitrows", () -> new SplitRows());
   }
 
   String ruleName;

@@ -156,6 +156,12 @@ public class RuleVisitorParserTest {
     assertEquals("Unnest{col='name', into=map, idx=['1', '2']}", runAndPrint(ruleCode));
   }
 
+  @Test
+  public void splitRowsTest() {
+    String ruleCode = "splitrows col: column1 on: '-' quote: '\"'";
+    assertEquals("SplitRows{col='column1', on='-', quote=''\"''}", runAndPrint(ruleCode));
+  }
+
   //@Test
   //public void unnestTest2() {
   //  String ruleCode = "unnest col: name~speed, weight into: map idx: '1', '2'";
