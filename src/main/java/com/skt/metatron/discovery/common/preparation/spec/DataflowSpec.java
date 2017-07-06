@@ -10,7 +10,7 @@ import com.skt.metatron.discovery.common.preparation.rule.Rule;
 
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.spark.sql.DataFrame;
+import org.apache.spark.sql.Dataset;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -89,7 +89,7 @@ public class DataflowSpec implements Serializable {
     String table;
 
     @JsonIgnore
-    DataFrame dataFrame;
+    Dataset dataFrame;
 
     public RuleByDataSet() {
     }
@@ -177,11 +177,11 @@ public class DataflowSpec implements Serializable {
       this.table = table;
     }
 
-    public DataFrame getDataFrame() {
+    public Dataset getDataFrame() {
       return dataFrame;
     }
 
-    public void setDataFrame(DataFrame dataFrame) {
+    public void setDataFrame(Dataset dataFrame) {
       this.dataFrame = dataFrame;
     }
   }
