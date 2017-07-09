@@ -33,6 +33,16 @@ public class Pivot implements Rule, Rule.Factory {
 
 
   public Pivot() {
+    limit = 0;
+  }
+
+  public Pivot(Expression col, Expression value, Expression group, Integer limit) {
+    this.col = col;
+    this.value = value;
+    this.group = group;
+    if (limit == null)
+      limit = 0;
+    this.limit = limit;
   }
 
   public Expression getCol() {

@@ -20,10 +20,17 @@ public class Unpivot implements Rule, Rule.Factory {
   Integer groupEvery;
 
   public Unpivot() {
+    groupEvery = 1;
+  }
+
+  public Unpivot(Expression col) {
+    this.col = col;
   }
 
   public Unpivot(Expression col, Integer groupEvery) {
     this.col = col;
+    if (groupEvery == null)
+      groupEvery = 1;
     this.groupEvery = groupEvery;
   }
 

@@ -54,6 +54,16 @@ public class Replace implements Rule, Rule.Factory {
   public Replace() {
   }
 
+  public Replace(Expression col, Expression on, Expression after, Expression before, Constant with, Boolean global, Expression row) {
+    this.col = col;
+    this.on = on;
+    this.after = after;
+    this.before = before;
+    this.with = with;
+    this.global = global;
+    this.row = row;
+  }
+
   @Override
   public String getName() {
     return "replace";

@@ -26,6 +26,7 @@ public class CountPattern implements Rule, Rule.Factory {
   Expression after;
 
   /**
+
    * 패턴/문자열에 일치한 위치 이전
    *
    */
@@ -39,6 +40,14 @@ public class CountPattern implements Rule, Rule.Factory {
 
 
   public CountPattern() {
+  }
+
+  public CountPattern(String col, Expression on, Expression after, Expression before, Boolean ignoreCase) {
+    this.col = col;
+    this.on = on;
+    this.after = after;
+    this.before = before;
+    this.ignoreCase = ignoreCase;
   }
 
   @Override

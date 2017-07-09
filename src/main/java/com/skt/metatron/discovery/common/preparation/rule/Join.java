@@ -16,6 +16,14 @@ public class Join implements Rule, Rule.Factory {
   public Join() {
   }
 
+  public Join(Expression dataset2, Expression leftSelectCol, Expression rigthSelectCol, Expression condition, String joinType) {
+    this.dataset2 = dataset2;
+    this.leftSelectCol = leftSelectCol;
+    this.rigthSelectCol = rigthSelectCol;
+    this.condition = condition;
+    this.joinType = joinType;
+  }
+
   public Expression getDataset2() {
     return dataset2;
   }

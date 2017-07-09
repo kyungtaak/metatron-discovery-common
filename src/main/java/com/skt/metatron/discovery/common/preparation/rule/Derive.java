@@ -20,6 +20,11 @@ public class Derive implements Rule, Rule.Factory {
   public Derive() {
   }
 
+  public Derive(Expression value, String as) {
+    this.value = value;
+    this.as = as;
+  }
+
   public Expression getValue() {
     return value;
   }

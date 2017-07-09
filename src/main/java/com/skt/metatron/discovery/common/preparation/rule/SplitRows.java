@@ -27,6 +27,12 @@ public class SplitRows implements Rule, Rule.Factory {
   public SplitRows() {
   }
 
+  public SplitRows(String col, Expression on, String quote) {
+    this.col = col;
+    this.on = on;
+    this.quote = quote;
+  }
+
   @Override
   public String getName() {
     return "split";

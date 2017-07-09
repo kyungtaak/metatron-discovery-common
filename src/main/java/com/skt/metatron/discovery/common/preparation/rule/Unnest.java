@@ -28,6 +28,12 @@ public class Unnest implements Rule, Rule.Factory {
   public Unnest() {
   }
 
+  public Unnest(String col, String into, Expression idx) {
+    this.col = col;
+    this.into = into;
+    this.idx = idx;
+  }
+
   public String getCol() {
     return col;
   }
