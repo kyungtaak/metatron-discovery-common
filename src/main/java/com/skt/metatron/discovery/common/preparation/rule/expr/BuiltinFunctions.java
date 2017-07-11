@@ -519,7 +519,7 @@ public interface BuiltinFunctions extends Function.Library {
     }
   }
 
-  class NvlFunc implements Function {
+  abstract class NvlFunc implements Function {
     @Override
     public String name() {
       return "nvl";

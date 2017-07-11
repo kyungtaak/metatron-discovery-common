@@ -40,6 +40,8 @@ public class RuleBuilder {
     ruleNameMapper.put("join", () -> new Join());
     ruleNameMapper.put("aggregate", () -> new Aggregate());
     ruleNameMapper.put("splitrows", () -> new SplitRows());
+    ruleNameMapper.put("move", () -> new Move());
+    ruleNameMapper.put("sort", () -> new Sort());
   }
 
   String ruleName;

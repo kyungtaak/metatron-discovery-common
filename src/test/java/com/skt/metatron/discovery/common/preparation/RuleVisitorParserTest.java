@@ -162,6 +162,24 @@ public class RuleVisitorParserTest {
     assertEquals("SplitRows{col='column1', on='-', quote=''\"''}", runAndPrint(ruleCode));
   }
 
+  @Test
+  public void moveTest1() {
+    String ruleCode = "move col: column1 after: column2";
+    assertEquals("Move{col=column1, after=column2, before=null}", runAndPrint(ruleCode));
+  }
+
+  @Test
+  public void moveTest2() {
+    String ruleCode = "move col: column10 before: column1";
+    assertEquals("Move{col=column10, after=null, before=column1}", runAndPrint(ruleCode));
+  }
+
+  @Test
+  public void sortTest() {
+    String ruleCode = "sort order: column9, column10";
+    assertEquals("Sort{order=[column9, column10]}", runAndPrint(ruleCode));
+  }
+
   //@Test
   //public void unnestTest2() {
   //  String ruleCode = "unnest col: name~speed, weight into: map idx: '1', '2'";
