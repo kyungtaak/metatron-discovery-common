@@ -4,7 +4,7 @@ import com.skt.metatron.discovery.common.preparation.rule.expr.Expression;
 import com.skt.metatron.discovery.common.preparation.rule.expr.Identifier;
 
 /**
- * Created by kyungtaak on 2017. 3. 3..
+ * Created by seungunchoe on 2017. 3. 3..
  */
 public class Unpivot implements Rule, Rule.Factory {
 

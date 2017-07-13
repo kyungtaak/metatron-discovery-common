@@ -3,7 +3,7 @@ package com.skt.metatron.discovery.common.preparation.rule;
 import com.skt.metatron.discovery.common.preparation.rule.expr.Expression;
 
 /**
- * Created by seungun on 2017. 5. 19.
+ * Created by seungunchoe on 2017. 5. 19.
  */
 public class Join implements Rule, Rule.Factory {
 

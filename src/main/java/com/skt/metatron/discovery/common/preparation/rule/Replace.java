@@ -4,7 +4,7 @@ import com.skt.metatron.discovery.common.preparation.rule.expr.Constant;
 import com.skt.metatron.discovery.common.preparation.rule.expr.Expression;
 
 /**
- * Created by kyungtaak on 2017. 3. 5..
+ * Created by seungunchoe on 2017. 3. 5..
  */
 public class Replace implements Rule, Rule.Factory {
 

@@ -4,7 +4,7 @@ import com.skt.metatron.discovery.common.preparation.rule.expr.Expression;
 import com.skt.metatron.discovery.common.preparation.rule.expr.Identifier;
 
 /**
- * Created by kyungtaak on 2017. 3. 13..
+ * Created by seungunchoe on 2017. 3. 13..
  */
 public class Pivot implements Rule, Rule.Factory {
 

@@ -3,7 +3,7 @@ package com.skt.metatron.discovery.common.preparation.rule;
 import com.skt.metatron.discovery.common.preparation.rule.expr.Expression;
 
 /**
- * Created by kyungtaak on 2017. 3. 13..
+ * Created by seungunchoe on 2017. 3. 13..
  */
 public class Aggregate implements Rule, Rule.Factory {
 
