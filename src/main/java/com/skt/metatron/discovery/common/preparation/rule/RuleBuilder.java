@@ -42,6 +42,7 @@ public class RuleBuilder {
     ruleNameMapper.put("splitrows", () -> new SplitRows());
     ruleNameMapper.put("move", () -> new Move());
     ruleNameMapper.put("sort", () -> new Sort());
+    ruleNameMapper.put("union", () -> new Union());
   }
 
   String ruleName;

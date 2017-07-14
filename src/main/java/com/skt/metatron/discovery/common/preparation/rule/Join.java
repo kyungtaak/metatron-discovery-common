@@ -9,17 +9,17 @@ public class Join implements Rule, Rule.Factory {
 
   Expression dataset2;
   Expression leftSelectCol;
-  Expression rigthSelectCol;
+  Expression rightSelectCol;
   Expression condition;
   String joinType;
 
   public Join() {
   }
 
-  public Join(Expression dataset2, Expression leftSelectCol, Expression rigthSelectCol, Expression condition, String joinType) {
+  public Join(Expression dataset2, Expression leftSelectCol, Expression rightSelectCol, Expression condition, String joinType) {
     this.dataset2 = dataset2;
     this.leftSelectCol = leftSelectCol;
-    this.rigthSelectCol = rigthSelectCol;
+    this.rightSelectCol = rightSelectCol;
     this.condition = condition;
     this.joinType = joinType;
   }
@@ -40,12 +40,12 @@ public class Join implements Rule, Rule.Factory {
     this.leftSelectCol = leftSelectCol;
   }
 
-  public Expression getRigthSelectCol() {
-    return rigthSelectCol;
+  public Expression getRightSelectCol() {
+    return rightSelectCol;
   }
 
-  public void setRigthSelectCol(Expression rigthSelectCol) {
-    this.rigthSelectCol = rigthSelectCol;
+  public void setRightSelectCol(Expression rightSelectCol) {
+    this.rightSelectCol = rightSelectCol;
   }
 
   public Expression getCondition() {
@@ -80,7 +80,7 @@ public class Join implements Rule, Rule.Factory {
         "dataset2=" + dataset2 +
         ", leftSelectCol=" + leftSelectCol +
         ", condition=" + condition +
-        ", rigthSelectCol=" + rigthSelectCol +
+        ", rightSelectCol=" + rightSelectCol +
         ", joinType='" + joinType + '\'' +
         '}';
   }

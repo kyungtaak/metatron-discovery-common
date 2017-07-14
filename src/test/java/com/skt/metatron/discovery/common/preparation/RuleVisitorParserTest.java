@@ -134,8 +134,8 @@ public class RuleVisitorParserTest {
 
   @Test
   public void joinTest() {
-    String ruleCode = "join dataset2: name2 leftSelectCol: ItemA,ItemB,ItemC rigthSelectCol: ItemD,ItemE condition: ItemF=ItemG && ItemH=ItemI joinType: 'inner'";
-    assertEquals("Join{dataset2=name2, leftSelectCol=[ItemA, ItemB, ItemC], condition=((ItemF = ItemG) && (ItemH = ItemI)), rigthSelectCol=[ItemD, ItemE], joinType=''inner''}", runAndPrint(ruleCode));
+    String ruleCode = "join dataset2: name2 leftSelectCol: ItemA,ItemB,ItemC rightSelectCol: ItemD,ItemE condition: ItemF=ItemG && ItemH=ItemI joinType: 'inner'";
+    assertEquals("Join{dataset2=name2, leftSelectCol=[ItemA, ItemB, ItemC], condition=((ItemF = ItemG) && (ItemH = ItemI)), rightSelectCol=[ItemD, ItemE], joinType=''inner''}", runAndPrint(ruleCode));
   }
 
   @Test
@@ -178,6 +178,12 @@ public class RuleVisitorParserTest {
   public void sortTest() {
     String ruleCode = "sort order: column9, column10";
     assertEquals("Sort{order=[column9, column10]}", runAndPrint(ruleCode));
+  }
+
+  @Test
+  public void unionTest() {
+    String ruleCode = "union leftSelectCol: ItemA,ItemB,ItemC, dataset2: df2,df3 rightSelectCol: ItemD,ItemE,ItemF totalCol: col1, col2, col3";
+    assertEquals("Union{dataset2=[df2, df3], leftSelectCol=[ItemA, ItemB, ItemC], rightSelectCol=[ItemD, ItemE, ItemF], totalCol=[col1, col2, col3]}", runAndPrint(ruleCode));
   }
 
   //@Test
