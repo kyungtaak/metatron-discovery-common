@@ -9,27 +9,27 @@ import java.util.ArrayList;
  */
 public class Union implements Rule, Rule.Factory {
 
-  Expression leftSelectCol;
+  Expression masterCol;
   Expression dataset2;
-  Expression rightSelectCol;
+  Expression slaveCol;
   Expression totalCol;
 
   public Union() {
   }
 
-  public Union(Expression leftSelectCol, Expression dataset2, Expression rightSelectCol, Expression totalCol) {
-    this.leftSelectCol = leftSelectCol;
+  public Union(Expression masterCol, Expression dataset2, Expression slaveCol, Expression totalCol) {
+    this.masterCol = masterCol;
     this.dataset2 = dataset2;
-    this.rightSelectCol = rightSelectCol;
+    this.slaveCol = slaveCol;
     this.totalCol = totalCol;
   }
 
-  public Expression getLeftSelectCol() {
-    return leftSelectCol;
+  public Expression getMasterCol() {
+    return masterCol;
   }
 
-  public void setLeftSelectCol(Expression leftSelectCol) {
-    this.leftSelectCol = leftSelectCol;
+  public void setMasterCol(Expression masterCol) {
+    this.masterCol = masterCol;
   }
 
   public Expression getDataset2() {
@@ -40,12 +40,12 @@ public class Union implements Rule, Rule.Factory {
     this.dataset2 = dataset2;
   }
 
-  public Expression getRightSelectCol() {
-    return rightSelectCol;
+  public Expression getSlaveCol() {
+    return slaveCol;
   }
 
-  public void setRightSelectCol(Expression rightSelectCol) {
-    this.rightSelectCol = rightSelectCol;
+  public void setSlaveCol(Expression slaveCol) {
+    this.slaveCol = slaveCol;
   }
 
   public Expression getTotalCol() {
@@ -70,8 +70,8 @@ public class Union implements Rule, Rule.Factory {
   public String toString() {
     return "Union{" +
         "dataset2=" + dataset2 +
-        ", leftSelectCol=" + leftSelectCol +
-        ", rightSelectCol=" + rightSelectCol +
+        ", masterCol=" + masterCol +
+        ", slaveCol=" + slaveCol +
         ", totalCol=" + totalCol +
         '}';
   }

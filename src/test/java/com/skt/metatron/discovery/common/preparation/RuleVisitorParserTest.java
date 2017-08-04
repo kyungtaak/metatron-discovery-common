@@ -182,8 +182,8 @@ public class RuleVisitorParserTest {
 
   @Test
   public void unionTest() {
-    String ruleCode = "union leftSelectCol: ItemA,ItemB,ItemC, dataset2: df2,df3 rightSelectCol: ItemD,ItemE,ItemF totalCol: col1, col2, col3";
-    assertEquals("Union{dataset2=[df2, df3], leftSelectCol=[ItemA, ItemB, ItemC], rightSelectCol=[ItemD, ItemE, ItemF], totalCol=[col1, col2, col3]}", runAndPrint(ruleCode));
+    String ruleCode = "union masterCol: ItemA,ItemB,ItemC, dataset2: df2,df3 slaveCol: ItemD,ItemE,ItemF totalCol: col1, col2, col3";
+    assertEquals("Union{dataset2=[df2, df3], masterCol=[ItemA, ItemB, ItemC], slaveCol=[ItemD, ItemE, ItemF], totalCol=[col1, col2, col3]}", runAndPrint(ruleCode));
   }
 
   //@Test
