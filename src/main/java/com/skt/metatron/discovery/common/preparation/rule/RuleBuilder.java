@@ -43,6 +43,7 @@ public class RuleBuilder {
     ruleNameMapper.put("move", () -> new Move());
     ruleNameMapper.put("sort", () -> new Sort());
     ruleNameMapper.put("union", () -> new Union());
+    ruleNameMapper.put("window", () -> new Window());
   }
 
   String ruleName;

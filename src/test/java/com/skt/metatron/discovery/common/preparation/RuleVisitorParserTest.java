@@ -186,6 +186,12 @@ public class RuleVisitorParserTest {
     assertEquals("Union{dataset2=[df2, df3], masterCol=[ItemA, ItemB, ItemC], slaveCol=[ItemD, ItemE, ItemF], totalCol=[col1, col2, col3]}", runAndPrint(ruleCode));
   }
 
+  @Test
+  public void windowTest() {
+    String ruleCode = "window value: first(speed), rank() order: weight, speed group: speed";
+    assertEquals("Window{value=FunctionArrayExpr{functions=[first(speed), rank()]}, group=speed, order=[weight, speed], partition=null, rowsBetween=null}", runAndPrint(ruleCode));
+  }
+
   //@Test
   //public void unnestTest2() {
   //  String ruleCode = "unnest col: name~speed, weight into: map idx: '1', '2'";

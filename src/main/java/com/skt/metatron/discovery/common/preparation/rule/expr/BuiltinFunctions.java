@@ -43,6 +43,20 @@ public interface BuiltinFunctions extends Function.Library {
 
   Logger LOGGER = LoggerFactory.getLogger(BuiltinFunctions.class);
 
+  abstract class NonParam implements Function {
+
+    @Override
+    public boolean validate(List<Expr> args) {
+      if (args.size() >= 1) {
+        LOGGER.warn("function '{}' needs 0 argument", name());
+        return false;
+      }
+
+      return true;
+    }
+
+  }
+
   abstract class SingleParam implements Function {
 
     @Override
@@ -172,11 +186,97 @@ public interface BuiltinFunctions extends Function.Library {
     }
   }
 
+  class first extends AggreationFunc {
+
+    @Override
+    public String name() {
+      return "first";
+    }
+  }
+
+  class last extends AggreationFunc {
+
+    @Override
+    public String name() {
+      return "last";
+    }
+  }
+
   class Count extends AggreationFunc {
 
     @Override
     public String name() {
       return "count";
+    }
+  }
+
+  abstract class WindowFuncNonParam extends NonParam { }
+
+  abstract class WindowFuncSingleParam extends SingleParam { }
+
+  abstract class WindowFuncDoubleParam extends DoubleParam { }
+
+  class rank extends WindowFuncNonParam {
+
+    @Override
+    public String name() {
+      return "rank";
+    }
+  }
+
+  class dense_rank extends WindowFuncNonParam {
+
+    @Override
+    public String name() {
+      return "dense_rank";
+    }
+  }
+
+  class percent_rank extends WindowFuncNonParam {
+
+    @Override
+    public String name() {
+      return "percent_rank";
+    }
+  }
+
+  class row_number extends WindowFuncNonParam {
+
+    @Override
+    public String name() {
+      return "row_number";
+    }
+  }
+
+  class ntile extends WindowFuncSingleParam {
+
+    @Override
+    public String name() {
+      return "ntile";
+    }
+  }
+
+  class lag extends WindowFuncDoubleParam {
+
+    @Override
+    public String name() {
+      return "lag";
+    }
+  }
+
+  class lead extends WindowFuncDoubleParam {
+
+    @Override
+    public String name() {
+      return "lead";
+    }
+  }
+
+  class cume_dist extends WindowFuncNonParam {
+
+    @Override
+    public String name() {
+      return "cume_dist";
     }
   }
 
