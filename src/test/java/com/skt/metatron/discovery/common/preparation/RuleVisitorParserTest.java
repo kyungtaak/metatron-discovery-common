@@ -188,8 +188,8 @@ public class RuleVisitorParserTest {
 
   @Test
   public void windowTest() {
-    String ruleCode = "window value: first(speed), rank() order: weight, speed group: speed";
-    assertEquals("Window{value=FunctionArrayExpr{functions=[first(speed), rank()]}, group=speed, order=[weight, speed], partition=null, rowsBetween=null}", runAndPrint(ruleCode));
+    String ruleCode = "window value: first(speed), rank() partition: speed order: weigh, speed";
+    assertEquals("Window{value=FunctionArrayExpr{functions=[first(speed), rank()]}, order=[weigh, speed], partition=speed, rowsBetween=null}", runAndPrint(ruleCode));
   }
 
   //@Test

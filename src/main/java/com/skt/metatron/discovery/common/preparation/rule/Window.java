@@ -14,12 +14,6 @@ public class Window implements Rule, Rule.Factory {
   Expression value;
 
   /**
-   * 복수개의 Group by 대상 컬럼
-   *
-   */
-  Expression group;
-
-  /**
    * limit of column (Optional)
    */
   Expression order;
@@ -32,9 +26,8 @@ public class Window implements Rule, Rule.Factory {
   public Window() {
   }
 
-  public Window(Expression col, Expression value, Expression group, Expression order, Expression partition, Expression rowsBetween) {
+  public Window(Expression value, Expression order, Expression partition, Expression rowsBetween) {
     this.value = value;
-    this.group = group;
     this.order = order;
     this.partition = partition;
     this.rowsBetween = rowsBetween;
@@ -46,14 +39,6 @@ public class Window implements Rule, Rule.Factory {
 
   public void setValue(Expression value) {
     this.value = value;
-  }
-
-  public Expression getGroup() {
-    return group;
-  }
-
-  public void setGroup(Expression group) {
-    this.group = group;
   }
 
   public Expression getOrder() {
@@ -94,7 +79,6 @@ public class Window implements Rule, Rule.Factory {
   public String toString() {
     return "Window{" +
         "value=" + value +
-        ", group=" + group +
         ", order=" + order +
         ", partition=" + partition +
         ", rowsBetween=" + rowsBetween +
