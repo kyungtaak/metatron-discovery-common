@@ -37,14 +37,11 @@ public class Extract implements Rule, Rule.Factory {
 
 
   public Extract() {
-    limit = 0;
   }
 
   public Extract(String col, Expression on, Integer limit, String quote, Boolean ignoreCase) {
     this.col = col;
     this.on = on;
-    if (limit == null)
-      limit = 0;
     this.limit = limit;
     this.quote = quote;
     this.ignoreCase = ignoreCase;
