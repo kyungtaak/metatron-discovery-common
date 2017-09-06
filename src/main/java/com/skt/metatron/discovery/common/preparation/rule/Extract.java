@@ -99,11 +99,13 @@ public class Extract implements Rule, Rule.Factory {
 
   @Override
   public String toString() {
+    String quoteString = null;
+    if (quote != null) quoteString = quote.toString(); else quoteString = "";
     return "Extract{" +
         "col='" + col + '\'' +
         ", on=" + on +
         ", limit=" + limit +
-        ", quote='" + quote.toString() + '\'' +
+        ", quote='" + quoteString + '\'' +
         ", ignoreCase=" + ignoreCase +
         '}';
   }
