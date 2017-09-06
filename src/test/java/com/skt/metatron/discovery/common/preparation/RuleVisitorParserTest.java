@@ -157,9 +157,21 @@ public class RuleVisitorParserTest {
   }
 
   @Test
-  public void splitRowsTest() {
+  public void splitRowsTest1() {
     String ruleCode = "splitrows col: column1 on: '-' quote: '\"'";
     assertEquals("SplitRows{col='column1', on='-', quote=''\"''}", runAndPrint(ruleCode));
+  }
+
+  @Test
+  public void splitRowsTest2() {
+    String ruleCode = "splitrows col: column1 on: '-' quote: ''";
+    assertEquals("SplitRows{col='column1', on='-', quote=''''}", runAndPrint(ruleCode));
+  }
+
+  @Test
+  public void splitRowsTest3() {
+    String ruleCode = "splitrows col: column1 on: '-' quote: '\"-'";
+    assertEquals("SplitRows{col='column1', on='-', quote=''\"-''}", runAndPrint(ruleCode));
   }
 
   @Test

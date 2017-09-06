@@ -22,12 +22,12 @@ public class SplitRows implements Rule, Rule.Factory {
   /**
    * Ignore matches between
    */
-  String quote;
+  Expression quote;
 
   public SplitRows() {
   }
 
-  public SplitRows(String col, Expression on, String quote) {
+  public SplitRows(String col, Expression on, Expression quote) {
     this.col = col;
     this.on = on;
     this.quote = quote;
@@ -59,11 +59,11 @@ public class SplitRows implements Rule, Rule.Factory {
     this.on = on;
   }
 
-  public String getQuote() {
+  public Expression getQuote() {
     return quote;
   }
 
-  public void setQuote(String quote) {
+  public void setQuote(Expression quote) {
     this.quote = quote;
   }
 
@@ -72,7 +72,7 @@ public class SplitRows implements Rule, Rule.Factory {
     return "SplitRows{" +
         "col='" + col + '\'' +
         ", on=" + on +
-        ", quote='" + quote + '\'' +
+        ", quote='" + quote.toString() + '\'' +
         '}';
   }
 }

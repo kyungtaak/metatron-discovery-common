@@ -27,7 +27,7 @@ public class Split implements Rule, Rule.Factory {
   /**
    * Ignore matches between
    */
-  String quote;
+  Expression quote;
 
   /**
    * if true, ignore case.
@@ -39,7 +39,7 @@ public class Split implements Rule, Rule.Factory {
   public Split() {
   }
 
-  public Split(String col, Expression on, Integer limit, String quote, Boolean ignoreCase) {
+  public Split(String col, Expression on, Integer limit, Expression quote, Boolean ignoreCase) {
     this.col = col;
     this.on = on;
     this.limit = limit;
@@ -81,11 +81,11 @@ public class Split implements Rule, Rule.Factory {
     this.limit = limit;
   }
 
-  public String getQuote() {
+  public Expression getQuote() {
     return quote;
   }
 
-  public void setQuote(String quote) {
+  public void setQuote(Expression quote) {
     this.quote = quote;
   }
 
@@ -103,7 +103,7 @@ public class Split implements Rule, Rule.Factory {
         "col='" + col + '\'' +
         ", on=" + on +
         ", limit=" + limit +
-        ", quote='" + quote + '\'' +
+        ", quote='" + quote.toString() + '\'' +
         ", ignoreCase=" + ignoreCase +
         '}';
   }
