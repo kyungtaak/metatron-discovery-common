@@ -63,7 +63,7 @@ public class RuleVisitorParserTest {
   @Test
   public void replaceTest() {
     String ruleCode = "replace col: Category with: 'abc' on: /\\d{3}/ global: true row: sales > 10";
-    assertEquals("Replace{col=Category, on=/\\\\d{3}/, after=null, before=null, with='abc', global=true, row=(sales > 10)}", runAndPrint(ruleCode));
+    assertEquals("Replace{col=Category, on=/\\d{3}/, after=null, before=null, with='abc', global=true, row=(sales > 10)}", runAndPrint(ruleCode));
   }
 
   @Test
