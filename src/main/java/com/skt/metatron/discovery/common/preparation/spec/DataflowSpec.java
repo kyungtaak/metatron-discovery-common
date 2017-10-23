@@ -89,7 +89,7 @@ public class DataflowSpec implements Serializable {
     String table;
 
     @JsonIgnore
-    Dataset dataFrame;
+    Object dataFrame;
 
     public RuleByDataSet() {
     }
@@ -177,11 +177,11 @@ public class DataflowSpec implements Serializable {
       this.table = table;
     }
 
-    public Dataset getDataFrame() {
+    public Object getDataFrame() {
       return dataFrame;
     }
 
-    public void setDataFrame(Dataset dataFrame) {
+    public void setDataFrame(Object dataFrame) {
       this.dataFrame = dataFrame;
     }
   }
