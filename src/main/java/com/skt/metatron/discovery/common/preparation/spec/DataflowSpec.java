@@ -89,7 +89,10 @@ public class DataflowSpec implements Serializable {
     String table;
 
     @JsonIgnore
-    Object dataFrame;
+    Dataset dataFrame;
+
+    @JsonIgnore
+    Object eddyDataFrame;
 
     public RuleByDataSet() {
     }
@@ -177,12 +180,20 @@ public class DataflowSpec implements Serializable {
       this.table = table;
     }
 
-    public Object getDataFrame() {
+    public Dataset getDataFrame() {
       return dataFrame;
     }
 
-    public void setDataFrame(Object dataFrame) {
+    public void setDataFrame(Dataset dataFrame) {
       this.dataFrame = dataFrame;
+    }
+
+    public Object getEddy() {
+      return eddyDataFrame;
+    }
+
+    public void setEddy(Object eddyDataFrame) {
+      this.eddyDataFrame = eddyDataFrame;
     }
   }
 
