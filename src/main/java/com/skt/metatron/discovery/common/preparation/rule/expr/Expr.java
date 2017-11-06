@@ -120,6 +120,10 @@ public interface Expr extends Expression {
     final Expr expr;
 
     public UnaryMinusExpr(Expr expr) {
+//      if (expr.toString().contains("."))
+//        this.expr = new Constant.DoubleExpr(Double.parseDouble("-" + expr.toString()));
+//      else
+//        this.expr = new Constant.LongExpr(Long.parseLong("-" + expr.toString()));
       this.expr = expr;
     }
 

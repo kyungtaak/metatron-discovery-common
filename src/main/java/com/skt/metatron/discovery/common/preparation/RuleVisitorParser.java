@@ -298,7 +298,11 @@ public class RuleVisitorParser implements Parser {
       int opCode = ((TerminalNode) ctx.getChild(0)).getSymbol().getType();
       switch (opCode) {
         case RuleParser.MINUS:
-          return new Expr.UnaryMinusExpr((Expr) ctx.getChild(1).accept(this));
+          Expr.UnaryMinusExpr tmp = new Expr.UnaryMinusExpr((Expr) ctx.getChild(1).accept(this));
+          if (tmp.toString().contains("."))
+            return new Constant.DoubleExpr(Long.valueOf(ctx.getText()));
+          else
+            return new Constant.LongExpr(Long.valueOf(ctx.getText()));
         case RuleParser.NOT:
           return new Expr.UnaryNotExpr((Expr) ctx.getChild(1).accept(this));
         default:

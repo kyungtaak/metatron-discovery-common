@@ -2,6 +2,7 @@ package com.skt.metatron.discovery.common.preparation;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.skt.metatron.discovery.common.preparation.rule.Rule;
 
 import org.junit.Test;
@@ -46,6 +47,12 @@ public class RuleVisitorParserTest {
   public void setTest2() {
     String ruleCode = "set col: name value: if(item, 1, 2) row: name == 'a'";
     assertEquals("Set{col='name', value=if(item,1,2), row=(name == 'a')}", runAndPrint(ruleCode));
+  }
+
+  @Test
+  public void setTest3() {
+    String ruleCode = "set col: name value: if(item * -3, 1, 2)";
+    assertEquals("Set{col='name', value=if((item * -3),1,2), row=null}", runAndPrint(ruleCode));
   }
 
   @Test
@@ -215,6 +222,7 @@ public class RuleVisitorParserTest {
     Rule rule = new RuleVisitorParser().parse(ruleCode);
 
     ObjectMapper mapper = new ObjectMapper();
+    mapper = mapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
     String json = null;
     try {
       json = mapper.writeValueAsString(rule);
