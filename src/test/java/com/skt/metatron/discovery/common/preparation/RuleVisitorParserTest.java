@@ -229,7 +229,7 @@ public class RuleVisitorParserTest {
     } catch (JsonProcessingException e) {
       e.printStackTrace();
     }
-    System.out.printf("code below: %n '%s' %n has been parsed to object: %n '%s'%n '%s'%n", ruleCode, json, rule.toString());
+    //System.out.printf("code below: %n '%s' %n has been parsed to object: %n '%s'%n '%s'%n", ruleCode, json, rule.toString());
     return rule.toString();
   }
 
