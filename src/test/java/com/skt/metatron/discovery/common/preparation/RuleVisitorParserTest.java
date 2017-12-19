@@ -56,6 +56,18 @@ public class RuleVisitorParserTest {
   }
 
   @Test
+  public void setTest4() {
+    String ruleCode = "set col: speed value: concat_ws('|', birth_date, itemNo, weight, name)";
+    assertEquals("Set{col='speed', value=concat_ws('|',birth_date,itemNo,weight,name), row=null}", runAndPrint(ruleCode));
+  }
+
+  @Test
+  public void setTest5() {
+    String ruleCode = "set col: speed value: concat('|', birth_date, itemNo, weight, name)";
+    assertEquals("Set{col='speed', value=concat('|',birth_date,itemNo,weight,name), row=null}", runAndPrint(ruleCode));
+  }
+
+  @Test
   public void setTypeTest() {
     String ruleCode = "settype col: Category type: 'Integer'";
     assertEquals("SetType{col='Category', type=''Integer''}", runAndPrint(ruleCode));

@@ -178,6 +178,8 @@ public class RuleVisitorParser implements Parser {
         exprs = Lists.newArrayList();
       }
 
+      if (func == null)
+        throw new RuntimeException(ctx.getParent().getStart().getText() + " dose not support function.");
       return new Expr.FunctionExpr(func, func.name(), exprs);
     }
 

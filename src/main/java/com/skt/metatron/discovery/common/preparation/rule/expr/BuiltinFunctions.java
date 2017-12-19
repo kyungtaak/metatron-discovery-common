@@ -712,6 +712,18 @@ public interface BuiltinFunctions extends Function.Library {
       }
     }
 
+    class ConcatwsFunc implements Function {
+      @Override
+      public String name() {
+        return "concat_ws";
+      }
+
+      @Override
+      public boolean validate(List<Expr> args) {
+        return true;
+      }
+    }
+
     class FormatFunc implements Function, Factory {
 
       @Override
